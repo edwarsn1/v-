@@ -1,0 +1,59 @@
+!web_links
+13,1
+"Center for Biokinetic and Dosimetric Research","http://ordose.ornl.gov"
+"EPA - Calculate Your Radiation Dose","www.epa.gov/rpdweb00/understand/calculate.html"
+"ICRP","http://www.icrp.org"
+"ISU Radiation Information Network","http://www.physics.isu.edu/radinf/"
+"LBL Atomic and Nuclear Properties of 292 Materials","http://pdg.lbl.gov/AtomicNuclearProperties/"
+"NCI I-131 Thyroid Risk Calculator for NTS Fallout", "http://ntsi131.nci.nih.gov/"
+"NCRP","http://www.ncrp.com"
+"NRC Rad Toolbox Page", "http://www.nrc.gov/about-nrc/regulatory/research/radiological-toolbox.html"
+"NIST data","http://www.physics.nist.gov/PhysRefData/contents.html"
+"ORAU Health Physics Resources","http://www.orau.org/ptp/infores.htm"
+"RSICC","http://rsicc.ornl.gov/Default.aspx"
+"Unit Converter", "http://online.unitconverterpro.com/unit-conversion/convert-alpha/radiation.html"
+"Wolfram Math", "http://mathworld.wolfram.com"
+!constants
+13,1
+"Elementary charge, e", 1.602176565E-19, "C"
+"Electron mass", 9.10938291E-31, "kg"
+"Proton mass", 1.672621777E-27, "kg"
+"Neutron mass", 1.674927351E-27, "kg"
+"Alpha particle mass", 6.64465675E-27, "kg"
+"Speed of light, c", 299792458, "m/s"
+"Avogadro constant", 6.02214129E+23, " /mol"
+"Atomic mass constant", 1.6605388921E-17, "kg"
+"Planck constant, h", 6.62606957E-34, "J s"
+"Molar gas constant, R", 8.3144621, "J / (mol K)"
+"Gravitational constant, G", 6.67384E-11, "N m^2 / kg^2"
+"e", 2.7182818284, "none"
+"pi", 3.1415926535, "none"
+!conversion_factors
+23,1
+"bar to pascal", 100000#
+"BTU to joule", 1055.87
+"curie to bequerel", 37000000000#
+"day to second", 86400.
+"degree to radian", 0.01745329
+"foot to meter", 0.3048
+"gallon to liter", 3.785412
+"gallon to meter^3", 0.003785412
+"knot to m/s", 0.514444
+"knot to mph", 1.1508
+"joules to MeV", 6241457000000#
+"mph to m/s",0.44704
+"MeV to erg", 1.60219E-19
+"pound to gram", 4.525924E+2
+"pound to kilogram", 0.4535924
+"psi to Pascal", 6894.757
+"rem to Sv", 0.01
+"rem/Ci to Sv/bq", 3.7E-12
+"roentgen to C/kg", 2.58E-4
+"Sv/Bq to rem/microCi", 3.7E6
+"UTC to EST (h)", -5
+"UTC to PST (h)", -8
+"year to second", 3.1536E7
+!threshold&lethal_doses
+0,0
+!typical_exposures_medical_procedures
+0,0

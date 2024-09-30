@@ -1,0 +1,37 @@
+
+ CRC check of toolbox data files:  02-02-2015
+
+ File             Status
+------------------------
+ADOSES.MDB        Valid
+ALPHA.MDB         Valid
+BIOASSAY.MDB      Valid
+BIOPUBLIC.MDB     Valid
+ELECTRON.MDB      Valid
+ELEMENT.MDB       Valid
+FGR12.MDB         Valid
+GEOPROG.MDB       Valid
+ICRP68.MDB        Valid
+ICRP72.MDB        Valid
+ICRP_89.MDB       Valid
+KERMAN.MDB        Valid
+KERMAP.MDB        Valid
+MATERIAL.MDB      Valid
+NEUTRONFIELD.MDB  Valid
+ORGANMASSES.MDB   Valid
+PHOTON.MDB        Valid
+PHOTONFIELD.MDB   Valid
+RISK.MDB          Valid
+ICRP07-INDEX.MDB  Valid
+ICRP-07.BET       Valid
+ICRP-07.NDX       Valid
+ICRP-07.RAD       Valid
+LICENSE.TXT       Valid
+FGR13CD.NDX       Valid
+FGR13EXT.RBS      Valid
+FGR13ING.RBS      Valid
+FGR13INH.RBS      Valid
+INHDOSE.DRT       Valid
+GAMMACNS.TXT      Valid
+REFS.TXT          Valid
+MISC.DAT          Valid
