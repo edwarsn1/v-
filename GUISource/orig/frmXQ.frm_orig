@@ -1,0 +1,3802 @@
+VERSION 5.00
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Begin VB.Form frmXQ 
+   Caption         =   "X/Q Tables"
+   ClientHeight    =   7365
+   ClientLeft      =   60
+   ClientTop       =   450
+   ClientWidth     =   11535
+   Icon            =   "frmXQ.frx":0000
+   LinkTopic       =   "Form1"
+   ScaleHeight     =   7365
+   ScaleWidth      =   11535
+   StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton cmdCancel 
+      Caption         =   "Reset"
+      CausesValidation=   0   'False
+      Height          =   375
+      Left            =   9960
+      TabIndex        =   71
+      Top             =   120
+      Width           =   1215
+   End
+   Begin VB.CommandButton cmdOK 
+      Caption         =   "OK"
+      Height          =   375
+      Left            =   9960
+      TabIndex        =   70
+      Top             =   600
+      Width           =   1215
+   End
+   Begin TabDlg.SSTab sstTabs 
+      Height          =   6315
+      Left            =   120
+      TabIndex        =   41
+      Top             =   960
+      Width           =   11295
+      _ExtentX        =   19923
+      _ExtentY        =   11139
+      _Version        =   393216
+      Tabs            =   2
+      TabsPerRow      =   5
+      TabHeight       =   520
+      ShowFocusRect   =   0   'False
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   12
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      TabCaption(0)   =   "Offsite"
+      TabPicture(0)   =   "frmXQ.frx":0442
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "Frame1(0)"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "Frame2"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "txtEditName"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "Frame3"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).ControlCount=   4
+      TabCaption(1)   =   "Onsite"
+      TabPicture(1)   =   "frmXQ.frx":045E
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "lblTo"
+      Tab(1).Control(1)=   "lblHover2"
+      Tab(1).Control(2)=   "lblHover1"
+      Tab(1).Control(3)=   "Line5"
+      Tab(1).Control(4)=   "Line4"
+      Tab(1).Control(5)=   "Line3"
+      Tab(1).Control(6)=   "Line2"
+      Tab(1).Control(7)=   "Line1"
+      Tab(1).Control(8)=   "lblExhaust"
+      Tab(1).Control(9)=   "lblInflow"
+      Tab(1).Control(10)=   "Grid"
+      Tab(1).Control(11)=   "fraXQ"
+      Tab(1).ControlCount=   12
+      Begin VB.Frame Frame3 
+         Caption         =   "X/Q Tables"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   4575
+         Left            =   480
+         TabIndex        =   115
+         ToolTipText     =   "List of all X/Q tables"
+         Top             =   600
+         Width           =   3015
+         Begin VB.ListBox lstXQTables 
+            Height          =   2010
+            ItemData        =   "frmXQ.frx":047A
+            Left            =   240
+            List            =   "frmXQ.frx":047C
+            TabIndex        =   0
+            ToolTipText     =   "List of all X/Q tables"
+            Top             =   1320
+            Width           =   2535
+         End
+         Begin VB.CommandButton cmdAddOffsite 
+            Caption         =   "Add Table"
+            Height          =   375
+            Left            =   900
+            TabIndex        =   116
+            ToolTipText     =   "Select to add a X/Q table.  "
+            Top             =   3840
+            Width           =   1215
+         End
+         Begin VB.Label Label1 
+            Alignment       =   2  'Center
+            Caption         =   "Display onsite tables in this list by clicking on the name below"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   975
+            Left            =   560
+            TabIndex        =   117
+            ToolTipText     =   "List of all X/Q tables"
+            Top             =   360
+            Width           =   1935
+         End
+      End
+      Begin VB.TextBox txtEditName 
+         Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   120
+         TabIndex        =   114
+         Top             =   5880
+         Visible         =   0   'False
+         Width           =   3015
+      End
+      Begin VB.Frame fraXQ 
+         Caption         =   "X/Q for selected paths"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   5575
+         Left            =   -74760
+         TabIndex        =   72
+         ToolTipText     =   "The X/Q table displayed corresponds to the name shown above it"
+         Top             =   480
+         Width           =   2655
+         Begin VB.ComboBox cboXQName 
+            Height          =   315
+            Left            =   120
+            Style           =   2  'Dropdown List
+            TabIndex        =   95
+            Top             =   360
+            Width           =   2415
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   0
+            Left            =   1205
+            TabIndex        =   76
+            Top             =   1320
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   1
+            Left            =   1205
+            TabIndex        =   78
+            Top             =   1650
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   2
+            Left            =   1205
+            TabIndex        =   80
+            Top             =   1980
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   3
+            Left            =   1205
+            TabIndex        =   82
+            Top             =   2310
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   4
+            Left            =   1205
+            TabIndex        =   84
+            Top             =   2640
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   5
+            Left            =   1205
+            TabIndex        =   86
+            Top             =   2970
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   6
+            Left            =   1205
+            TabIndex        =   88
+            Top             =   3300
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   7
+            Left            =   1205
+            TabIndex        =   90
+            Top             =   3630
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   8
+            Left            =   1205
+            TabIndex        =   92
+            Top             =   3960
+            Width           =   1050
+         End
+         Begin VB.TextBox txtXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   9
+            Left            =   1205
+            TabIndex        =   94
+            Top             =   4290
+            Width           =   1050
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   9
+            Left            =   600
+            TabIndex        =   93
+            Top             =   4290
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   8
+            Left            =   600
+            TabIndex        =   91
+            Top             =   3960
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   7
+            Left            =   600
+            TabIndex        =   89
+            Top             =   3630
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   6
+            Left            =   600
+            TabIndex        =   87
+            Top             =   3300
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   5
+            Left            =   600
+            TabIndex        =   85
+            Top             =   2970
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   4
+            Left            =   600
+            TabIndex        =   83
+            Top             =   2640
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   3
+            Left            =   600
+            TabIndex        =   81
+            Top             =   2310
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   2
+            Left            =   600
+            TabIndex        =   79
+            Top             =   1980
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   325
+            Index           =   1
+            Left            =   600
+            TabIndex        =   77
+            Top             =   1650
+            Width           =   600
+         End
+         Begin VB.TextBox txtTimeXQ 
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Enabled         =   0   'False
+            Height          =   330
+            Index           =   0
+            Left            =   600
+            TabIndex        =   75
+            Top             =   1320
+            Width           =   600
+         End
+         Begin VB.CommandButton cmdDeleteTable 
+            Caption         =   "Delete"
+            Enabled         =   0   'False
+            Height          =   375
+            Left            =   1600
+            TabIndex        =   74
+            Top             =   4965
+            Width           =   855
+         End
+         Begin VB.CommandButton cmdAddOnsite 
+            Caption         =   "Add Table"
+            Height          =   375
+            Left            =   200
+            TabIndex        =   73
+            ToolTipText     =   "Must be selected to add a X/Q table.  "
+            Top             =   4965
+            Width           =   1215
+         End
+         Begin VB.Label lblPaste 
+            Alignment       =   2  'Center
+            Caption         =   "Paste"
+            Height          =   255
+            Index           =   2
+            Left            =   1080
+            TabIndex        =   121
+            ToolTipText     =   "Used to copy data from spreadsheets"
+            Top             =   4665
+            Width           =   615
+         End
+         Begin VB.Label lblXQ 
+            Alignment       =   2  'Center
+            BackStyle       =   0  'Transparent
+            Caption         =   "   X/Q (s/cu m)"
+            Height          =   495
+            Left            =   1440
+            TabIndex        =   107
+            Top             =   840
+            Width           =   795
+         End
+         Begin VB.Label lblTime 
+            Alignment       =   2  'Center
+            BackStyle       =   0  'Transparent
+            Caption         =   "Time (h)"
+            Height          =   495
+            Left            =   600
+            TabIndex        =   106
+            Top             =   840
+            Width           =   690
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "3"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   29
+            Left            =   360
+            TabIndex        =   105
+            Top             =   2030
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "2"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   28
+            Left            =   360
+            TabIndex        =   104
+            Top             =   1730
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "1"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   27
+            Left            =   360
+            TabIndex        =   103
+            Top             =   1400
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "4"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   26
+            Left            =   360
+            TabIndex        =   102
+            Top             =   2360
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "5"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   25
+            Left            =   360
+            TabIndex        =   101
+            Top             =   2690
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "6"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   24
+            Left            =   360
+            TabIndex        =   100
+            Top             =   3020
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "7"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   23
+            Left            =   360
+            TabIndex        =   99
+            Top             =   3350
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "8"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   22
+            Left            =   360
+            TabIndex        =   98
+            Top             =   3680
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "9"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   21
+            Left            =   360
+            TabIndex        =   97
+            Top             =   4010
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "10"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   20
+            Left            =   240
+            TabIndex        =   96
+            Top             =   4340
+            Width           =   255
+         End
+      End
+      Begin VB.Frame Frame2 
+         Caption         =   "Low Population Zone"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   4575
+         Left            =   7680
+         TabIndex        =   56
+         ToolTipText     =   "Offsite atmospheric dispersion (X/Q) tables are provided, default names are shown"
+         Top             =   600
+         Width           =   3015
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Enabled         =   0   'False
+            Height          =   325
+            Index           =   0
+            Left            =   720
+            TabIndex        =   21
+            Top             =   840
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   1
+            Left            =   720
+            TabIndex        =   23
+            Top             =   1170
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   2
+            Left            =   720
+            TabIndex        =   25
+            Top             =   1500
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   3
+            Left            =   720
+            TabIndex        =   27
+            Top             =   1830
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   4
+            Left            =   720
+            TabIndex        =   29
+            Top             =   2160
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   5
+            Left            =   720
+            TabIndex        =   31
+            Top             =   2490
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   6
+            Left            =   720
+            TabIndex        =   33
+            Top             =   2820
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   7
+            Left            =   720
+            TabIndex        =   35
+            Top             =   3150
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   8
+            Left            =   720
+            TabIndex        =   37
+            Top             =   3480
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   9
+            Left            =   720
+            TabIndex        =   39
+            Top             =   3810
+            Width           =   925
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   9
+            Left            =   1650
+            TabIndex        =   40
+            Top             =   3810
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   8
+            Left            =   1650
+            TabIndex        =   38
+            Top             =   3480
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   7
+            Left            =   1650
+            TabIndex        =   36
+            Top             =   3150
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   6
+            Left            =   1650
+            TabIndex        =   34
+            Top             =   2820
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   5
+            Left            =   1650
+            TabIndex        =   32
+            Top             =   2490
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   4
+            Left            =   1650
+            TabIndex        =   30
+            Top             =   2160
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   3
+            Left            =   1650
+            TabIndex        =   28
+            Top             =   1830
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   2
+            Left            =   1650
+            TabIndex        =   26
+            Top             =   1500
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   1
+            Left            =   1650
+            TabIndex        =   24
+            Top             =   1170
+            Width           =   1050
+         End
+         Begin VB.TextBox txtLPZ 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   0
+            Left            =   1650
+            TabIndex        =   22
+            Top             =   840
+            Width           =   1050
+         End
+         Begin VB.CommandButton cmdDelete 
+            Appearance      =   0  'Flat
+            Caption         =   "X"
+            Height          =   195
+            Index           =   1
+            Left            =   2760
+            TabIndex        =   57
+            ToolTipText     =   "Delete this table"
+            Top             =   165
+            Width           =   195
+         End
+         Begin VB.Label lblPaste 
+            Alignment       =   2  'Center
+            Caption         =   "Paste"
+            Height          =   255
+            Index           =   1
+            Left            =   1320
+            TabIndex        =   120
+            ToolTipText     =   "Used to copy data from spreadsheets"
+            Top             =   4225
+            Width           =   615
+         End
+         Begin VB.Label lblDoseLocation 
+            Alignment       =   2  'Center
+            BackStyle       =   0  'Transparent
+            Caption         =   "      X/Q      (s/cu m)"
+            Height          =   375
+            Index           =   1
+            Left            =   1680
+            TabIndex        =   69
+            Top             =   360
+            Width           =   930
+         End
+         Begin VB.Label lblDoseLocation 
+            Alignment       =   2  'Center
+            BackStyle       =   0  'Transparent
+            Caption         =   "Time (h)"
+            Height          =   255
+            Index           =   0
+            Left            =   720
+            TabIndex        =   68
+            Top             =   555
+            Width           =   930
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "1"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   19
+            Left            =   360
+            TabIndex        =   67
+            Top             =   840
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "2"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   18
+            Left            =   360
+            TabIndex        =   66
+            Top             =   1170
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "3"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   17
+            Left            =   360
+            TabIndex        =   65
+            Top             =   1500
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "4"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   16
+            Left            =   360
+            TabIndex        =   64
+            Top             =   1830
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "5"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   15
+            Left            =   360
+            TabIndex        =   63
+            Top             =   2160
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "6"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   14
+            Left            =   360
+            TabIndex        =   62
+            Top             =   2490
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "7"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   13
+            Left            =   360
+            TabIndex        =   61
+            Top             =   2820
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "8"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   12
+            Left            =   360
+            TabIndex        =   60
+            Top             =   3150
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "9"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   11
+            Left            =   360
+            TabIndex        =   59
+            Top             =   3480
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "10"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Index           =   10
+            Left            =   240
+            TabIndex        =   58
+            Top             =   3810
+            Width           =   255
+         End
+      End
+      Begin VB.Frame Frame1 
+         Caption         =   "Exclusion Area Boundary"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   4575
+         Index           =   0
+         Left            =   4080
+         TabIndex        =   42
+         ToolTipText     =   "Offsite atmospheric dispersion (X/Q) tables are provided, default names are shown"
+         Top             =   600
+         Width           =   3015
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Enabled         =   0   'False
+            Height          =   325
+            Index           =   0
+            Left            =   720
+            TabIndex        =   1
+            Top             =   840
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   1
+            Left            =   720
+            TabIndex        =   3
+            Top             =   1170
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   2
+            Left            =   720
+            TabIndex        =   5
+            Top             =   1500
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   3
+            Left            =   720
+            TabIndex        =   7
+            Top             =   1830
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   4
+            Left            =   720
+            TabIndex        =   9
+            Top             =   2160
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   5
+            Left            =   720
+            TabIndex        =   11
+            Top             =   2490
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   6
+            Left            =   720
+            TabIndex        =   13
+            Top             =   2820
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   7
+            Left            =   720
+            TabIndex        =   15
+            Top             =   3150
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   8
+            Left            =   720
+            TabIndex        =   17
+            Top             =   3480
+            Width           =   925
+         End
+         Begin VB.TextBox txtTimeEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   9
+            Left            =   720
+            TabIndex        =   19
+            Top             =   3810
+            Width           =   925
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   9
+            Left            =   1650
+            TabIndex        =   20
+            Top             =   3810
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   8
+            Left            =   1650
+            TabIndex        =   18
+            Top             =   3480
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   7
+            Left            =   1650
+            TabIndex        =   16
+            Top             =   3150
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   6
+            Left            =   1650
+            TabIndex        =   14
+            Top             =   2820
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   5
+            Left            =   1650
+            TabIndex        =   12
+            Top             =   2490
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   4
+            Left            =   1650
+            TabIndex        =   10
+            Top             =   2160
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   3
+            Left            =   1650
+            TabIndex        =   8
+            Top             =   1830
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   2
+            Left            =   1650
+            TabIndex        =   6
+            Top             =   1500
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   1
+            Left            =   1650
+            TabIndex        =   4
+            Top             =   1170
+            Width           =   1050
+         End
+         Begin VB.TextBox txtEAB 
+            Appearance      =   0  'Flat
+            Height          =   325
+            Index           =   0
+            Left            =   1650
+            TabIndex        =   2
+            Top             =   840
+            Width           =   1050
+         End
+         Begin VB.CommandButton cmdDelete 
+            Appearance      =   0  'Flat
+            Caption         =   "X"
+            Height          =   195
+            Index           =   0
+            Left            =   2760
+            TabIndex        =   43
+            ToolTipText     =   "Delete this table"
+            Top             =   165
+            Width           =   195
+         End
+         Begin VB.Label lblPaste 
+            Alignment       =   2  'Center
+            Caption         =   "Paste"
+            Height          =   255
+            Index           =   0
+            Left            =   1335
+            TabIndex        =   119
+            ToolTipText     =   "Used to copy data from spreadsheets"
+            Top             =   4225
+            Width           =   615
+         End
+         Begin VB.Label lblDoseLocation 
+            Alignment       =   2  'Center
+            BackStyle       =   0  'Transparent
+            Caption         =   "   X/Q   (s/cu m)"
+            Height          =   375
+            Index           =   2
+            Left            =   1680
+            TabIndex        =   55
+            Top             =   360
+            Width           =   930
+         End
+         Begin VB.Label lblDoseLocation 
+            Alignment       =   2  'Center
+            BackStyle       =   0  'Transparent
+            Caption         =   "Time (h)"
+            Height          =   255
+            Index           =   3
+            Left            =   720
+            TabIndex        =   54
+            Top             =   565
+            Width           =   930
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "1"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   0
+            Left            =   360
+            TabIndex        =   53
+            Top             =   840
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "2"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   1
+            Left            =   360
+            TabIndex        =   52
+            Top             =   1170
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "3"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   2
+            Left            =   360
+            TabIndex        =   51
+            Top             =   1500
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "4"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   3
+            Left            =   360
+            TabIndex        =   50
+            Top             =   1800
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "5"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   4
+            Left            =   360
+            TabIndex        =   49
+            Top             =   2160
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "6"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   5
+            Left            =   360
+            TabIndex        =   48
+            Top             =   2490
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "7"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   6
+            Left            =   360
+            TabIndex        =   47
+            Top             =   2820
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "8"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   7
+            Left            =   360
+            TabIndex        =   46
+            Top             =   3150
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "9"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   8
+            Left            =   360
+            TabIndex        =   45
+            Top             =   3480
+            Width           =   135
+         End
+         Begin VB.Label lblNum 
+            AutoSize        =   -1  'True
+            BackStyle       =   0  'Transparent
+            Caption         =   "10"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   225
+            Index           =   9
+            Left            =   240
+            TabIndex        =   44
+            Top             =   3810
+            Width           =   255
+         End
+      End
+      Begin MSFlexGridLib.MSFlexGrid Grid 
+         Height          =   3585
+         Left            =   -71595
+         TabIndex        =   108
+         Top             =   960
+         Width           =   7545
+         _ExtentX        =   13309
+         _ExtentY        =   6324
+         _Version        =   393216
+         Rows            =   6
+         Cols            =   6
+         Appearance      =   0
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin VB.Label lblInflow 
+         Alignment       =   2  'Center
+         Caption         =   "Paths with inflow from the environment"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   -70155
+         TabIndex        =   113
+         Top             =   600
+         Width           =   5535
+      End
+      Begin VB.Label lblExhaust 
+         Caption         =   "Paths which exhaust to the environment"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   -71235
+         TabIndex        =   112
+         Top             =   4680
+         Width           =   4815
+      End
+      Begin VB.Line Line1 
+         BorderWidth     =   2
+         X1              =   -71715
+         X2              =   -71595
+         Y1              =   2640
+         Y2              =   2760
+      End
+      Begin VB.Line Line2 
+         BorderWidth     =   2
+         X1              =   -71715
+         X2              =   -71595
+         Y1              =   2880
+         Y2              =   2760
+      End
+      Begin VB.Line Line3 
+         BorderWidth     =   2
+         X1              =   -71835
+         X2              =   -71835
+         Y1              =   4800
+         Y2              =   2760
+      End
+      Begin VB.Line Line4 
+         BorderWidth     =   2
+         X1              =   -71835
+         X2              =   -71595
+         Y1              =   2760
+         Y2              =   2760
+      End
+      Begin VB.Line Line5 
+         BorderWidth     =   2
+         X1              =   -71355
+         X2              =   -71835
+         Y1              =   4800
+         Y2              =   4800
+      End
+      Begin VB.Label lblHover1 
+         AutoSize        =   -1  'True
+         Caption         =   "Hover Message"
+         Height          =   240
+         Left            =   -68475
+         TabIndex        =   111
+         Top             =   5075
+         Visible         =   0   'False
+         Width           =   1455
+      End
+      Begin VB.Label lblHover2 
+         AutoSize        =   -1  'True
+         Caption         =   "Hover Message"
+         Height          =   240
+         Left            =   -68475
+         TabIndex        =   110
+         Top             =   5795
+         Visible         =   0   'False
+         Width           =   1455
+      End
+      Begin VB.Label lblTo 
+         Alignment       =   2  'Center
+         Caption         =   "To"
+         Height          =   255
+         Left            =   -68040
+         TabIndex        =   109
+         Top             =   5430
+         Visible         =   0   'False
+         Width           =   255
+      End
+   End
+   Begin VB.Label Label2 
+      Alignment       =   2  'Center
+      Appearance      =   0  'Flat
+      Caption         =   "Offsite and Onsite X/Q Tables"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   13.5
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   375
+      Left            =   2700
+      TabIndex        =   118
+      Top             =   240
+      Width           =   6135
+   End
+End
+Attribute VB_Name = "frmXQ"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Private Declare Function GetSystemMetrics Lib "user32" (ByVal nIndex As Long) As Long
+Private Const SM_CXVSCROLL = 2
+Private Const SM_CYHSCROLL = 3
+Private DataModify As Boolean
+Private XQModify As Boolean
+Private EditIndex As Integer
+Private CaptionHeight As Single
+Private Initialized As Boolean
+Private TablesVisible As Integer
+Private RowItems As Integer
+Private ColumnItems As Integer
+Private MouseRow As Single
+Private MouseCol As Single
+Private fNoClick As Boolean
+Private TableIndex As Integer
+Private ToolMessage As Boolean
+Private CurrentXQIndex As Integer
+Private StartLeft As Single
+Private NewLeft As Single
+Private StartTabWidth As Single
+Private NewTabWidth As Single
+Private StartFormWidth As Single
+Private NewFormWidth As Single
+Private StartButtonLeft As Single
+Private NewButtonLeft As Single
+Private DisableList As Boolean
+'----------------------------------------------------
+'Updates are made to this copy until Save
+Private XQArr(1 To MaxPathXQ + 1) As PathXQrecord
+Private XQCount As Integer
+'----------------------------------------------------
+
+Private Sub cmdAddOffsite_Click()
+    
+    If TablesVisible = 2 Then
+        ShowTable3
+    End If
+    
+    If TablesVisible > 0 Then
+        EditTableName TablesVisible
+    Else
+        'If there are no offsite tables we are adding the first
+        EditTableName 1
+    End If
+End Sub
+
+Private Sub cmdOK_Click()
+    Unload Me
+End Sub
+
+Private Sub cmdCancel_Click()
+'Displays existing data from global arrays
+'Recopies to local editing arrays
+Dim Table3 As Boolean
+Dim i As Integer
+    
+    Table3 = (TablesVisible = 3)
+    
+    For i = 0 To 9
+        txtEAB(i) = ""
+        txtTimeEAB(i) = ""
+        txtLPZ(i) = ""
+        txtTimeLPZ(i) = ""
+        If TablesVisible = 3 Then
+            txtLPZ(i + 10) = ""
+            txtTimeLPZ(i + 10) = ""
+        End If
+        txtXQ(i) = ""
+        txtTimeXQ(i) = ""
+    Next
+
+    RefreshXQDisplay
+    
+    sstTabs.Tab = 0
+    If Table3 Then
+        If TablesVisible = 2 Then HideTable3
+    End If
+    
+    XQModify = False
+    DataModify = False
+End Sub
+
+Private Sub EditTableName(Index As Integer)
+'The 3 frames are Frame1(0), Frame2, and Frame1(1), left to right
+'Index argument counts them as if in an array: 1, 2, and 3
+
+    With txtEditName
+        If .Visible Then
+            'Textbox is already visible over another frame
+            cmdDelete(EditIndex - 1).Visible = True
+        End If
+        
+        .Top = Frame1(0).Top
+        Select Case Index
+            Case 1
+                .Left = Frame1(0).Left
+                .Text = Frame1(0).Caption
+            Case 2
+                .Left = Frame2.Left
+                .Text = Frame2.Caption
+            Case 3
+                .Left = Frame1(1).Left
+                .Text = Frame1(1).Caption
+        End Select
+        
+        .Visible = True
+        .SetFocus
+    End With
+    
+    'Highlight the current name
+    SendKeys "+^{End}"
+    'Cosmetic
+    cmdDelete(Index - 1).Visible = False
+    'Save the index for EndEditName(), which will save the data
+    EditIndex = Index
+End Sub
+
+Private Sub cmdDelete_Click(Index As Integer)
+'Removes data from an Offsite X/Q table, #1, #2 or #3
+'Index argument is control array index for Delete buttons
+'If onsite X/Qs exist, their sequence numbers change
+Dim TableName As String
+Dim Reply As VbMsgBoxResult
+Dim Interval As Single
+Dim i As Integer
+
+    With XQArr(Index + 1)
+        TableName = .Name
+        Reply = MsgBox("Remove X/Q table " & TableName & " ?", vbOKCancel, "Delete Table")
+
+        If Reply = vbOK Then
+            With lstXQTables
+                For i = 0 To .ListCount - 1
+                    If .List(i) = TableName Then
+                        .RemoveItem i
+                        Exit For
+                    End If
+                Next
+            End With
+            
+            'Erase data and mark unused
+            .Name = ""
+            .Number = 0
+            .dlXQ.Model = 0
+            For i = 1 To .dlXQ.Count
+                .dlXQ.Data(i) = 0
+                .dlXQ.times(i) = 0
+            Next
+            .dlXQ.Count = 0
+
+            Select Case Index
+                Case 0
+                    Frame1(0).Caption = ""
+                    For i = 0 To 9
+                        txtTimeEAB(i) = ""
+                        txtEAB(i) = ""
+                    Next
+                    txtTimeEAB(0) = SourceTerm.DelayTime
+                Case 1
+                    Frame2.Caption = ""
+                    For i = 0 To 9
+                        txtTimeLPZ(i) = ""
+                        txtLPZ(i) = ""
+                    Next
+                    txtTimeLPZ(0) = SourceTerm.DelayTime
+                Case 2
+                    HideTable3
+                    'Offsite X/Q #3 has an associated dose location we must remove
+                    DeleteDoseLocation 3, False
+            End Select
+            XQCount = XQCount - 1
+            RenumberXQTables Index, True
+        End If
+    End With
+    DataModify = True
+End Sub
+
+Private Sub HideTable3()
+Dim Interval As Single
+Dim i As Integer
+
+    Frame1(1).Caption = ""
+    Frame1(1).Visible = False
+    For i = 10 To 19
+        txtTimeLPZ(i) = ""
+        txtLPZ(i) = ""
+    Next
+    txtTimeLPZ(10) = SourceTerm.DelayTime
+            
+    TablesVisible = 2
+    cmdAddOffsite.Visible = True
+    Me.Width = StartFormWidth
+    StartFormWidth = 0
+    sstTabs.Width = StartTabWidth
+    Frame3.Left = StartLeft
+    Interval = StartLeft + Frame3.Width
+    Frame1(0).Left = Frame3.Left + Interval
+    Frame2.Left = Frame1(0).Left + Interval
+    cmdOK.Left = StartButtonLeft
+    cmdCancel.Left = cmdOK.Left
+End Sub
+
+Private Sub RenumberXQTables(ChangedItem As Integer, Delete As Boolean)
+'Called for adding or deleting offsite X/Q table #3 or any onsite table
+Dim Index As Integer
+Dim Data As Integer
+Dim i As Integer, j As Integer
+
+On Error GoTo RenumberError
+
+    'Change X/Q numbering, and Onsite table numbers
+    'Data being modified is temporary, so cancel can still be selected
+    cboXQName.Clear
+    j = 0
+    
+    For i = 1 To MaxPathXQ + 1
+        With XQArr(i)
+            If .Name <> "" Then
+                j = j + 1
+                .Number = j
+                If i > 3 Then
+                    cboXQName.AddItem j & "-" & .Name
+                    cboXQName.ItemData(cboXQName.NewIndex) = i
+                End If
+            End If
+        End With
+    Next
+    
+    'j is actual X/Q count
+    XQCount = j
+    
+    With cboXQName
+        If .ListCount > 0 Then
+            DisableList = True
+            .ListIndex = 0
+            DisableList = False
+        End If
+    End With
+    
+    For i = 1 To RowItems
+        For j = 1 To ColumnItems
+            Data = Grid.TextMatrix(i, j)
+            If Delete Then
+                If Data = ChangedItem Then
+                    Grid.TextMatrix(i, j) = ""
+                ElseIf Data > ChangedItem Then
+                    Data = Data - 1
+                    Grid.TextMatrix(i, j) = Data
+                End If
+            Else
+                If Data >= ChangedItem Then
+                    Data = Data + 1
+                    Grid.TextMatrix(i, j) = Data
+                End If
+            End If
+        Next
+    Next
+    Exit Sub
+    
+RenumberError:
+    MsgBox Err.Description, vbExclamation, "RenumberXQTables()"
+End Sub
+
+Private Sub CopyXQData()
+Dim i As Integer, j As Integer
+
+On Error GoTo CopyError
+
+    For j = 1 To MaxPathXQ + 1
+        With XQArr(j).dlXQ
+            ReDim .times(MaxDimen)
+            ReDim .Data(MaxDimen)
+        End With
+        With PathXQArr(j)
+            XQArr(j).Name = .Name
+            XQArr(j).Number = .Number
+            With .dlXQ
+                For i = 1 To UBound(.times)
+                    XQArr(j).dlXQ.times(i) = .times(i)
+                    XQArr(j).dlXQ.Data(i) = .Data(i)
+                Next
+                XQArr(j).dlXQ.Count = .Count
+            End With
+        End With
+    Next
+    Exit Sub
+
+CopyError:
+    MsgBox Err.Description, vbExclamation, "CopyXQData()"
+End Sub
+
+Private Sub RefreshXQDisplay()
+'Offsite tab shows first. This sets up display values
+'The first 3 elements in PathXQArr are reserved for the defaults, EAB and LPZ,
+'plus one spare for an additional dose location & breathing rate in the environment
+Dim i As Integer, j As Integer
+
+On Error GoTo RefreshError
+
+    With lstXQTables
+        .Clear
+        TablesVisible = 0
+        For i = 1 To 3
+          If PathXQArr(i).Name <> "" Then 'And PathXQArr(i).dlXQ.Count > 0 Then
+            .AddItem PathXQArr(i).Name
+            .ItemData(.NewIndex) = i
+            TablesVisible = TablesVisible + 1
+          End If
+        Next
+        XQCount = TablesVisible
+        
+        If TablesVisible = 3 Then
+            'Show3Tables 'Conserves display space
+            ShowTable3
+        End If
+        
+        DisplayOffsiteTables
+        CopyXQData
+        
+        For i = 4 To MaxPathXQ + 1
+          If PathXQArr(i).Name <> "" Then
+            .AddItem PathXQArr(i).Name
+            'Keep track of array index
+            .ItemData(.NewIndex) = i
+            XQCount = XQCount + 1
+          End If
+        Next
+        
+        With cboXQName
+            If .ListIndex >= 0 Then
+                .ListIndex = 0
+            End If
+        End With
+        
+        .SetFocus
+    End With
+    Exit Sub
+    
+RefreshError:
+    MsgBox Err.Description, vbExclamation, "RefreshXQDisplay()"
+End Sub
+
+Private Sub Form_Activate()
+
+    If Not Initialized Then 'Once only
+        Initialized = True
+                
+        'For X/Q table name edit, Frame.Caption
+        Me.FontSize = Frame1(0).FontSize
+        Me.FontBold = Frame1(0).FontBold
+        'Measuring size of hot spot to click on frame name for editing
+        CaptionHeight = TextHeight("LPZ")
+
+        RefreshXQDisplay
+        DataModify = False
+        OnsiteSetup
+    End If
+    
+    CheckClipboard
+End Sub
+
+Private Sub Form_Load()
+Dim Displaywidth As Single
+
+    With frmRadtrad
+        Me.Top = .Top
+        Displaywidth = .Left + .Width + Me.Width
+        Me.Left = .Left + .Width
+        If Displaywidth > Screen.Width Then
+            Me.Left = Me.Left - (Displaywidth - Screen.Width)
+        End If
+    End With
+    
+    
+    Initialized = False
+    TablesVisible = 0
+    StartButtonLeft = cmdOK.Left
+    DataModify = False
+    DisableList = False
+End Sub
+
+Private Sub Form_QueryUnload(cancel As Integer, UnloadMode As Integer)
+    
+    If XQModify Then 'For Onsite tables
+        'Displayed table has been modified
+        With cboXQName
+            If XQArr(.ItemData(.ListIndex)).dlXQ.Count > 0 Then
+                If VerifyXQTable(.ItemData(.ListIndex)) Then
+                    DataModify = True
+                Else
+                    cancel = 1
+                    Exit Sub
+                End If
+            Else
+                'Table was added, no values were entered
+                XQModify = False
+            End If
+        End With
+    End If
+    
+    If DataModify Then
+        If SaveData Then
+            frmRadtrad.SaveState True
+        Else
+            cancel = 1
+        End If
+    End If
+End Sub
+
+Private Sub Form_Resize()
+  If Me.WindowState = vbNormal Then
+    AdjustToScreen Me
+  End If
+End Sub
+
+Private Sub DisplayOffsiteTables()
+'We always reserve X/Q tables #1 and #2 for EAB and LPZ
+'Either may be blank or renamed
+Dim TablesFilled As Integer
+Dim i As Integer
+
+On Error GoTo DisplayError
+
+    TablesFilled = 0
+    
+    If Not UCase(DoseLocationArr(1).Name) Like "*UNUSED*" Then
+      Frame1(0).Caption = DoseLocationArr(1).Name
+      With PathXQArr(1)
+        With .dlXQ
+            If .Count = 0 Then
+                txtTimeEAB(0) = SourceTerm.DelayTime
+            Else
+                For i = 1 To .Count
+                    txtTimeEAB(i - 1) = .times(i)
+                    txtEAB(i - 1) = ZeroFormat(.Data(i), FloatFormat)
+                Next
+            End If
+            TablesFilled = TablesFilled + 1
+        End With
+      End With
+    End If
+    
+    If Not UCase(DoseLocationArr(2).Name) Like "*UNUSED*" Then
+      With PathXQArr(2).dlXQ
+        Select Case TablesFilled
+          Case 0
+            Frame1(0).Caption = DoseLocationArr(2).Name
+            If .Count = 0 Then
+                txtTimeEAB(0) = SourceTerm.DelayTime
+            Else
+                For i = 1 To .Count
+                    txtTimeEAB(i - 1) = .times(i)
+                    txtEAB(i - 1) = ZeroFormat(.Data(i), FloatFormat)
+                Next
+            End If
+          Case 1
+            Frame2.Caption = DoseLocationArr(2).Name
+            If .Count = 0 Then
+                txtTimeLPZ(0) = SourceTerm.DelayTime
+            Else
+                For i = 1 To .Count
+                    txtTimeLPZ(i - 1) = .times(i)
+                    txtLPZ(i - 1) = ZeroFormat(.Data(i), FloatFormat)
+                Next
+            End If
+            TablesFilled = TablesFilled + 1
+        End Select
+      End With
+    End If
+
+    If Not UCase(DoseLocationArr(3).Name) Like "*UNUSED*" Then
+        With PathXQArr(3).dlXQ
+          Select Case TablesFilled
+            Case 0
+              Frame1(0).Caption = DoseLocationArr(3).Name
+              If .Count = 0 Then
+                  txtTimeEAB(0) = SourceTerm.DelayTime
+              Else
+                  For i = 1 To .Count
+                      txtTimeEAB(i - 1) = .times(i)
+                      txtEAB(i - 1) = ZeroFormat(.Data(i), FloatFormat)
+                  Next
+              End If
+          
+            Case 1
+              Frame2.Caption = DoseLocationArr(3).Name
+              If .Count = 0 Then
+                  txtTimeLPZ(0) = SourceTerm.DelayTime
+              Else
+                  For i = 1 To .Count
+                      txtTimeLPZ(i - 1) = .times(i)
+                      txtLPZ(i - 1) = ZeroFormat(.Data(i), FloatFormat)
+                  Next
+              End If
+          
+            Case 2
+              Frame1(1).Caption = DoseLocationArr(3).Name
+              If .Count = 0 Then
+                  txtTimeLPZ(10) = SourceTerm.DelayTime
+              Else
+                  For i = 1 To .Count
+                      txtTimeLPZ(i - 1 + 10) = .times(i)
+                      txtLPZ(i - 1 + 10) = ZeroFormat(.Data(i), FloatFormat)
+                  Next
+              End If
+          End Select
+        End With
+    End If
+    Exit Sub
+    
+DisplayError:
+    MsgBox Err.Description, vbExclamation, "DisplayOffsiteTables()"
+End Sub
+
+Private Sub ShowTable3()
+Dim Interval As Single
+Dim i As Integer, j As Integer
+
+On Error GoTo Table3Error
+
+    With sstTabs
+        j = .Left + .Width - cmdOK.Left
+        Interval = ResizeTabs
+        
+        Me.Width = .Width + 2 * .Left + (Me.Width - Me.ScaleWidth)
+        NewFormWidth = Me.Width
+        cmdOK.Left = .Left + .Width - j
+        
+        With cmdOK
+            If .Left > (Me.Width - .Width - 200) Then
+                'Low resolution bug
+                .Left = Me.Width - .Width - 200
+            End If
+        End With
+        cmdCancel.Left = cmdOK.Left
+        NewButtonLeft = cmdOK.Left
+    End With
+    
+On Error Resume Next
+    Load Frame1(1)
+On Error GoTo Table3Error
+
+    With Frame1(1)
+        .Left = Frame2.Left + Interval
+        .Top = Frame2.Top
+        .Caption = ""
+        .Visible = True
+    End With
+    
+On Error Resume Next
+    Load cmdDelete(2)
+On Error GoTo Table3Error
+
+    With cmdDelete(2)
+        Set .Container = Frame1(1)
+        .Left = cmdDelete(1).Left
+        .Top = cmdDelete(1).Top
+        .Visible = True
+        .ToolTipText = "Delete this table"
+    End With
+    
+    j = txtLPZ(9).TabIndex + 1
+
+    For i = 10 To 19
+On Error Resume Next
+        Load txtTimeLPZ(i)
+On Error GoTo Table3Error
+
+        With txtTimeLPZ(i)
+            Set .Container = Frame1(1)
+            .Left = txtTimeLPZ(0).Left
+            .Top = txtTimeLPZ(i - 10).Top
+            If i > 10 Then
+                .Enabled = True
+                .Text = ""
+            End If
+            .Visible = True
+            .TabIndex = j
+            j = j + 1
+        End With
+        
+On Error Resume Next
+        Load txtLPZ(i)
+On Error GoTo Table3Error
+
+        With txtLPZ(i)
+            Set .Container = Frame1(1)
+            .Left = txtLPZ(0).Left
+            .Top = txtLPZ(i - 10).Top
+            .Text = ""
+            .Visible = True
+            .TabIndex = j
+            j = j + 1
+        End With
+        
+        'Line numbers
+On Error Resume Next
+        Load lblNum(i + 20)
+On Error GoTo Table3Error
+        
+        With lblNum(i + 20)
+            Set .Container = Frame1(1)
+            .Top = lblNum(i - 10).Top
+            .Caption = lblNum(i - 10).Caption
+            .Visible = True
+        End With
+    Next
+    
+On Error Resume Next
+    Load lblPaste(3)
+On Error GoTo Table3Error
+
+    With lblPaste(3)
+        Set .Container = Frame1(1)
+        .Top = 4225
+        .Left = 1335
+        .Visible = True
+        .ToolTipText = lblPaste(0).ToolTipText
+    End With
+    cmdAddOffsite.Visible = False
+    TablesVisible = 3
+    Exit Sub
+    
+Table3Error:
+    MsgBox Err.Description, vbExclamation, "ShowTable3()"
+    Exit Sub
+End Sub
+
+Private Function ResizeTabs() As Single
+Dim Interval As Single
+
+    With Frame3
+        StartFormWidth = Me.Width
+        StartTabWidth = sstTabs.Width
+        StartLeft = .Left
+        .Left = lstXQTables.Left
+        NewLeft = .Left
+        Interval = .Left + .Width
+    End With
+    
+    Frame1(0).Left = Frame3.Left + Interval
+    Frame2.Left = Frame1(0).Left + Interval
+    
+    With sstTabs
+        .Width = lstXQTables.Left + Interval * 4
+        NewTabWidth = .Width
+    End With
+    
+    ResizeTabs = Interval
+End Function
+
+Private Sub Frame1_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    
+    If Y < CaptionHeight Then
+        Select Case Index
+            Case 0
+                'Frame #1, on the left
+                EditTableName 1
+
+            Case 1
+                'Frame #3, on the right
+                EditTableName 3
+        End Select
+    End If
+End Sub
+
+Private Sub Frame1_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    CheckClipboard
+End Sub
+
+Private Sub Frame2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Y < CaptionHeight Then
+        EditTableName 2
+    End If
+End Sub
+
+Private Sub Frame2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    CheckClipboard
+End Sub
+
+Private Sub fraXQ_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    cmdAddOnsite.Enabled = True
+    CheckClipboard
+End Sub
+
+Private Sub lblPaste_Click(Index As Integer)
+    PasteToTable Index
+End Sub
+
+Private Sub lstXQTables_Click()
+
+    With lstXQTables
+        If .ItemData(.ListIndex) > 3 Then
+            TableIndex = .ItemData(.ListIndex)
+            sstTabs.Tab = 1
+        End If
+    End With
+End Sub
+
+Private Function SaveData() As Boolean
+Dim i As Integer, j As Integer
+Dim Count As Integer
+Dim Data As Integer
+Dim Buffer As String
+Dim TestTimes() As Single
+
+    SaveData = False
+        
+    If DataModify Then 'Read Onsite matrix
+        If (RowItems > 0) And (ColumnItems > 0) Then
+            XQIndexRows = RowItems
+            XQIndexCols = ColumnItems
+            ReDim PathXQMap(1 To RowItems, 1 To ColumnItems)
+    
+            For i = 1 To RowItems
+                For j = 1 To ColumnItems
+                    With Grid
+                        .Row = i
+                        .Col = j
+                        If .CellBackColor = vbButtonFace Then
+                            Data = -1
+                        ElseIf .TextMatrix(i, j) = "" Then
+                            Data = 0
+                        Else
+                            Data = val(.TextMatrix(i, j))
+                        End If
+                    End With
+                    PathXQMap(i, j) = Data
+                Next
+            Next
+        End If
+  
+        'XQCount = 0
+        'Keep default offsite table numbers available
+        XQCount = 2 'JCK 7/2006
+        
+        For j = 1 To 3
+            'Offsite tables all show edited data so no copy was made
+            'But clear deleted tables, indicated by .Name = ""
+            If XQArr(j).Name = "" Then
+                With PathXQArr(j)
+                    .Name = ""
+                    .Number = 0
+                    .dlXQ.Count = 0
+                End With
+                Count = 0
+            Else
+                Select Case j
+                  Case 1
+                    For Count = 0 To MaxDimen - 1
+                      If Count = 0 And txtEAB(0) = "" Then Exit For
+                      If txtTimeEAB(Count) = "" And txtEAB(Count) = "" Then
+                         Exit For
+                      End If
+                    Next
+                  Case 2
+                    For Count = 0 To MaxDimen - 1
+                      If Count = 0 And txtLPZ(0) = "" Then
+                        Exit For
+                      End If
+                      If txtTimeLPZ(Count) = "" And txtLPZ(Count) = "" Then
+                          Exit For
+                      End If
+                    Next
+                  Case 3
+                    If TablesVisible = 3 Then
+                      For Count = 0 To MaxDimen - 1
+                        If Count = 0 And txtLPZ(10) = "" Then
+                          Exit For
+                        End If
+                        If txtTimeLPZ(Count + 10) = "" And txtLPZ(Count + 10) = "" Then
+                            Exit For
+                        End If
+                      Next
+                    Else
+                        Exit For
+                    End If
+                End Select
+            End If
+            
+            With PathXQArr(j).dlXQ
+                If Count > 0 Then
+                  ReDim TestTimes(1 To Count)
+                  
+                  For i = 1 To Count
+                    Select Case j
+                      Case 1
+                          If IsValid(txtTimeEAB(i - 1)) Then
+                              TestTimes(i) = CSng(txtTimeEAB(i - 1))
+                              '.times(i) = val(txtTimeEAB(i - 1))
+                          ElseIf i > 1 Then
+                              MsgBox "Non-numeric", vbInformation, "Entry Error"
+                              txtTimeEAB(i - 1).SetFocus
+                              Exit Function
+                          End If
+                          If Not IsValid(txtEAB(i - 1)) Then
+                              MsgBox "Non-numeric", vbInformation, "Entry Error"
+                              txtEAB(i - 1).SetFocus
+                              Exit Function
+                          End If
+                      Case 2
+                        If IsValid(txtTimeLPZ(i - 1)) Then
+                            TestTimes(i) = CSng(txtTimeLPZ(i - 1))
+                            '.times(i) = val(txtTimeLPZ(i - 1))
+                        ElseIf i > 1 Then
+                            MsgBox "Non-numeric", vbInformation, "Entry Error"
+                            txtTimeLPZ(i - 1).SetFocus
+                            Exit Function
+                        End If
+                        If Not IsValid(txtLPZ(i - 1)) Then
+                            MsgBox "Non-numeric", vbInformation, "Entry Error"
+                            txtLPZ(i - 1).SetFocus
+                            Exit Function
+                        End If
+                      Case 3
+                        If TablesVisible = 3 Then
+                          If IsValid(txtTimeLPZ(i - 1 + 10)) Then
+                            TestTimes(i) = CSng(txtTimeLPZ(i - 1 + 10))
+                            '.times(i) = val(txtTimeLPZ(i - 1 + 10))
+                          ElseIf i > 1 Then
+                            MsgBox "Non-numeric", vbInformation, "Entry Error"
+                            txtTimeLPZ(i - 1 + 10).SetFocus
+                            Exit Function
+                          End If
+                          If Not IsValid(txtLPZ(i - 1 + 10)) Then
+                            MsgBox "Non-numeric", vbInformation, "Entry Error"
+                            txtLPZ(i - 1 + 10).SetFocus
+                            Exit Function
+                          End If
+                        End If
+                    End Select
+                  Next
+    
+                  For i = 2 To Count
+                     If TestTimes(i) <= TestTimes(i - 1) Then
+                       If sstTabs.Tab = 1 Then
+                          sstTabs.Tab = 0
+                       End If
+                       MsgBox "Invalid timestep", vbInformation, "Entry Error"
+                       Select Case j
+                           Case 1
+                               txtTimeEAB(i - 1).SetFocus
+                           Case 2
+                               txtTimeLPZ(i - 1).SetFocus
+                           Case 3
+                               txtTimeLPZ(i - 1 + 10).SetFocus
+                       End Select
+                       Exit Function
+                     End If
+                  Next
+                       
+                    .Model = 1
+                    .Count = Count
+                    ReDim .times(1 To Count) As Single
+                    ReDim .Data(1 To Count) As Single
+                    For i = 1 To Count
+                      .times(i) = TestTimes(i)
+                      Select Case j
+                          Case 1
+                              .Data(i) = CSng(txtEAB(i - 1))
+                          Case 2
+                              .Data(i) = CSng(txtLPZ(i - 1))
+                          Case 3
+                              .Data(i) = CSng(txtLPZ(i - 1 + 10))
+                      End Select
+                    Next
+                    
+                    With PathXQArr(j)
+                        .Name = XQArr(j).Name
+                        .Number = j 'XQArr(j).Number - JCK 7/2006
+                        'XQCount = XQCount + 1
+                        If j = 3 Then
+                            XQCount = 3
+                        End If
+                    End With
+                Else
+                    .Model = 0
+                    .Count = 0
+                    ReDim Preserve .times(1 To 1) As Single
+                    ReDim .Data(1 To 1) As Single
+                    
+                    With PathXQArr(j)
+                        .Name = XQArr(j).Name
+                        .Number = 0 'XQArr(j).Number - JCK 7/2006
+                    End With
+                End If
+            End With
+        Next
+        
+        For j = 4 To MaxPathXQ + 1
+            Count = XQArr(j).dlXQ.Count
+            With PathXQArr(j)
+                If Count > 0 Then
+                    XQCount = XQCount + 1
+                    .Name = XQArr(j).Name
+                    .Number = XQCount 'XQArr(j).Number - JCK 7/2006
+                    'XQCount = XQCount + 1
+                    With .dlXQ
+                        .Model = 1
+                        .Count = Count
+                        ReDim .times(1 To Count) As Single
+                        ReDim .Data(1 To Count) As Single
+                        'Copy data from local arrays to global storage
+                        For i = 1 To Count
+                            .times(i) = XQArr(j).dlXQ.times(i)
+                            .Data(i) = XQArr(j).dlXQ.Data(i)
+                        Next
+                    End With
+                Else
+                    .dlXQ.Model = 0
+                    .Name = ""
+                    .Number = 0
+                End If
+            End With
+        Next
+        Appl.PathDependentXQcount = XQCount
+    End If
+    
+    SaveData = True
+End Function
+
+Private Function IsValid(TB As Control) As Boolean
+    If TB.Text = "" Then
+        TB.Text = "0"
+        IsValid = True
+    Else
+        IsValid = IsNumeric(TB.Text)
+    End If
+End Function
+
+Private Sub sstTabs_Click(PreviousTab As Integer)
+Dim i As Integer
+
+    Select Case sstTabs.Tab
+        Case 0
+            If StartFormWidth > 0 Then
+                Me.Width = NewFormWidth
+                sstTabs.Width = NewTabWidth
+                Frame3.Left = NewLeft
+                cmdOK.Left = NewButtonLeft
+                cmdCancel.Left = cmdOK.Left
+            End If
+            TableIndex = 0
+
+        Case 1
+            If StartFormWidth > 0 Then
+                Me.Width = StartFormWidth
+                sstTabs.Width = StartTabWidth
+                cmdOK.Left = StartButtonLeft
+                cmdCancel.Left = cmdOK.Left
+            End If
+            With cboXQName
+                If TableIndex > 0 Then
+                    For i = 0 To .ListCount - 1
+                        If .ItemData(i) = TableIndex Then
+                            .ListIndex = i
+                            Exit For
+                        End If
+                    Next
+                ElseIf cboXQName.ListCount > 0 Then
+                    .ListIndex = 0
+                End If
+                
+                If .ListIndex >= 0 Then
+                    CurrentXQIndex = .ItemData(.ListIndex)
+                End If
+            End With
+    End Select
+End Sub
+
+Private Sub CheckClipboard()
+'See if data on the clipboard looks like Excel data - JCK 11/2005
+Dim ValidData As Boolean
+Dim i As Integer
+
+    ValidData = CheckClipboardData
+    If ValidData <> lblPaste(0).Enabled Then
+        For i = 0 To lblPaste.UBound
+            lblPaste(i).Enabled = ValidData
+        Next
+    End If
+OK:
+End Sub
+
+Private Sub PasteToTable(TableID As Integer)
+'JCK 11/2005
+Dim PasteData() As String
+Dim Buffer As String
+Dim nError As Single
+Dim i As Integer, j As Integer
+
+On Error GoTo PastingError
+
+
+    j = 0
+    nError = -1
+    Buffer = Clipboard.GetText
+    
+    Do
+        i = InStr(Buffer, vbCrLf)
+        PasteData = Split(Left(Buffer, i - 1), vbTab)
+        i = i + 1
+        Buffer = Right(Buffer, Len(Buffer) - i)
+        
+        Select Case TableID
+            Case 0
+                'Default EAB table
+                If j = 0 Then
+                    If val(txtTimeEAB(j).Text) <> val(PasteData(0)) Then
+                        nError = val(txtTimeEAB(j).Text)
+                        Exit Do
+                    End If
+                Else
+                    txtTimeEAB(j).Text = PasteData(0)
+                End If
+                txtEAB(j).Text = PasteData(1)
+            Case 1
+                'Default LPZ table
+                If j = 0 Then
+                    If val(txtTimeLPZ(j).Text) <> val(PasteData(0)) Then
+                        nError = val(txtTimeLPZ(j).Text)
+                        Exit Do
+                    End If
+                Else
+                    txtTimeLPZ(j).Text = PasteData(0)
+                End If
+                txtLPZ(j).Text = PasteData(1)
+            Case 3 'Optional offsite #3
+                If j = 0 Then
+                    If Frame1(1).Caption = "" Then
+                        MsgBox "Name table before pasting data", vbExclamation, "Can't Paste"
+                        Exit Sub
+                    End If
+                    If val(txtTimeLPZ(j + 10).Text) <> val(PasteData(0)) Then
+                        nError = val(txtTimeLPZ(j + 10).Text)
+                        Exit Do
+                    End If
+                Else
+                    txtTimeLPZ(j + 10).Text = PasteData(0)
+                End If
+                txtLPZ(j + 10).Text = PasteData(1)
+            Case 2 'Onsite table
+                If j = 0 Then
+                    If val(txtTimeXQ(j).Text) <> val(PasteData(0)) Then
+                        nError = val(txtTimeXQ(j).Text)
+                        Exit Do
+                    End If
+                Else
+                    txtTimeXQ(j).Text = PasteData(0)
+                End If
+                txtXQ(j).Text = PasteData(1)
+        End Select
+        j = j + 1
+    Loop Until Buffer = ""
+    
+    If nError >= 0 Then
+        PasteError nError, Me
+    End If
+    
+    Select Case TableID
+        Case 0
+            txtEAB(0).SetFocus
+        Case 1
+            txtLPZ(0).SetFocus
+        Case 3
+            txtLPZ(10).SetFocus
+        Case 2
+            txtXQ(0).SetFocus
+    End Select
+    Exit Sub
+    
+PastingError:
+    Beep
+End Sub
+
+Private Sub OnsiteSetup()
+Const VCellSize = 540
+Const HCellSize = 1200
+Dim EnvComp As Integer
+Dim Scrollbar As Long
+Dim Index As Integer
+Dim i As Integer, j As Integer
+
+On Error GoTo OnsiteError
+
+    Scrollbar = GetSystemMetrics(SM_CXVSCROLL)
+    Scrollbar = Scrollbar * (Screen.TwipsPerPixelX + 1)
+    
+    With Grid
+        .Rows = MaxPathXQ + 1
+        .Cols = MaxPathXQ + 1
+        'Add the width of visible lines dividing the cells and the scrollbar
+        .Width = 6 * HCellSize + (5 * Screen.TwipsPerPixelX) + Scrollbar
+        Scrollbar = GetSystemMetrics(SM_CYHSCROLL)
+        Scrollbar = Scrollbar * (Screen.TwipsPerPixelY + 1)
+        .Height = 6 * VCellSize + 5 * Screen.TwipsPerPixelY + Scrollbar
+
+        For i = 0 To MaxPathXQ
+            .RowHeight(i) = VCellSize
+            .ColWidth(i) = HCellSize
+        Next
+        
+        'Me.Width = .Left + .Width + fraXQ.Left + Me.Width - Me.ScaleWidth
+        lblInflow.Left = .Left + .CellWidth
+        lblInflow.Width = .Width - .CellWidth
+    End With
+    
+    EnvComp = VerifyEnvironment()
+    
+    If EnvComp > 0 Then
+        RowItems = 0
+        With Grid
+            .WordWrap = True
+            'Find pathways that exhaust to Environment compartment
+            'Show in row headers of table
+            For i = 1 To MaxPathways
+                With PathwayArr(i)
+                    If .ToComp = EnvComp Then
+                        'Path exhausts to Environment
+                        RowItems = RowItems + 1
+                        With Grid
+                            .Row = RowItems
+                            .Col = 0
+                            'Record actual compartment index in ItemData
+                            .RowData(RowItems) = i
+                            .Text = i & " " & PathwayArr(i).Name
+                            .CellAlignment = flexAlignLeftCenter
+                        End With
+                        
+                        'Special case for Control Room -- Can't exhaust to Enviroment
+                        If CompartmentArr(.FromComp).Type = 1 Then
+                            With Grid
+                                For j = 1 To MaxPathXQ
+                                    .Col = j
+                                    .CellBackColor = vbButtonFace
+                                Next
+                                .Col = 0
+                                If XQIndexRows > 0 And XQIndexCols > 0 Then
+                                    If RowItems >= .Row Then 'JCK 7/2006
+                                        If PathXQMap(.Row, 1) = 0 Then
+                                            'Force save to put -1 values in X/Q map, for early 3.10 files
+                                            DataModify = True
+                                        End If
+                                    End If
+                                End If
+                            End With
+                        End If
+                    End If
+                End With
+            Next
+            
+            'Write column headers
+            ShowInflowPaths EnvComp
+            
+            RefreshXQList
+
+            If Appl.PathDependentXQcount > 2 Then
+                If PathXQArr(3).Name = "" Then
+                    EnableXQTable
+                ElseIf Appl.PathDependentXQcount > 3 Then
+                    With cboXQName
+                        If .ListCount > 0 Then
+                            EnableXQTable
+                            .ListIndex = 0
+                        End If
+                    End With
+                End If
+                Index = 0
+                
+                If txtTimeXQ(0) = "" Then
+                    txtTimeXQ(0) = SourceTerm.DelayTime
+                End If
+            Else
+                For i = 0 To 9
+                    txtXQ(i).BackColor = vbButtonFace
+                    txtTimeXQ(i).BackColor = vbButtonFace
+                    txtTimeXQ(i).BorderStyle = 0
+                    lblNum(i).ForeColor = vbButtonShadow
+                Next
+                lblTime.ForeColor = vbButtonShadow
+                lblXQ.ForeColor = vbButtonShadow
+            End If
+
+            If XQIndexRows > 0 And XQIndexCols > 0 Then
+                For i = 1 To XQIndexRows
+                    For j = 1 To XQIndexCols
+                        If PathXQMap(i, j) > 0 Then
+                            .Row = i
+                            .Col = j
+                            WriteGridCell Format(PathXQMap(i, j))
+                        End If
+                    Next
+                Next
+            End If
+            
+            .Row = 0
+            .Col = 0
+        End With
+    Else
+        MsgBox "No Environment compartment exists", vbInformation, "Onsite Atmospheric Dispersion"
+        Exit Sub
+    End If
+
+    For i = 0 To 9
+        txtTimeXQ(i).ToolTipText = "The X/Q table displayed corresponds to the name shown above it"
+        txtXQ(i).ToolTipText = "The X/Q table displayed corresponds to the name shown above it"
+    Next
+    
+    XQModify = False
+    ToolMessage = False
+    Exit Sub
+    
+OnsiteError:
+    MsgBox Err.Description, vbExclamation, "OnsiteSetup()"
+End Sub
+
+Private Sub txtEAB_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+On Error Resume Next
+
+     Select Case KeyCode
+        Case vbKeyUp
+            If Index > 0 Then
+                txtEAB(Index - 1).SetFocus
+            Else
+                txtEAB(9).SetFocus
+            End If
+        Case vbKeyDown
+            If Index < 9 Then
+                txtEAB(Index + 1).SetFocus
+            Else
+                txtEAB(0).SetFocus
+            End If
+        Case vbKeyLeft
+            txtTimeEAB(Index).SetFocus
+        Case vbKeyRight
+            txtTimeLPZ(Index).SetFocus
+    End Select
+End Sub
+
+Private Sub txtEditName_Change()
+    DataModify = True
+End Sub
+
+Private Sub txtEditName_KeyPress(KeyAscii As Integer)
+    If KeyAscii = vbKeyReturn Then
+        EndEditName
+        KeyAscii = 0
+    ElseIf KeyAscii = vbKeyEscape Then
+        txtEditName = ""
+        txtEditName.Visible = False
+        cmdDelete(EditIndex - 1).Visible = True
+        EditIndex = 0
+    End If
+End Sub
+
+Private Sub EndEditName()
+Dim Response As VbMsgBoxResult
+Dim fNewTableName As Boolean
+Dim i As Integer
+
+    If txtEditName <> "" And txtEditName <> String(Len(txtEditName), " ") Then
+        fNewTableName = (XQArr(EditIndex).Name = "")
+        DoseLocationArr(EditIndex).Name = txtEditName
+        XQArr(EditIndex).Name = txtEditName
+        
+        Select Case EditIndex
+            Case 1
+                Frame1(0).Caption = txtEditName
+            Case 2
+                Frame2.Caption = txtEditName
+            Case 3
+                Frame1(1).Caption = txtEditName
+        End Select
+        
+        If fNewTableName Then
+            RenumberXQTables EditIndex, False
+        End If
+
+        txtEditName = ""
+        txtEditName.Visible = False
+        cmdDelete(EditIndex - 1).Visible = True
+        
+        With lstXQTables
+            .Clear
+            For i = 1 To MaxPathXQ + 1
+                If XQArr(i).Name <> "" Then
+                    .AddItem XQArr(i).Name
+                    .ItemData(.NewIndex) = i
+                End If
+            Next
+        End With
+        DataModify = True
+    Else
+        txtEditName.Visible = False
+    End If
+End Sub
+
+Private Sub txtEditName_LostFocus()
+    EndEditName
+End Sub
+
+Private Sub txtLPZ_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+On Error Resume Next
+
+     Select Case KeyCode
+        Case vbKeyUp
+            If Index < 10 Then
+                If Index > 0 Then
+                    txtLPZ(Index - 1).SetFocus
+                Else
+                    txtLPZ(9).SetFocus
+                End If
+            Else
+                If Index > 10 Then
+                    txtLPZ(Index - 1).SetFocus
+                Else
+                    txtLPZ(19).SetFocus
+                End If
+            End If
+        Case vbKeyDown
+            If Index < 10 Then
+                If Index < 9 Then
+                    txtLPZ(Index + 1).SetFocus
+                Else
+                    txtLPZ(0).SetFocus
+                End If
+            Else
+                If Index < 19 Then
+                    txtLPZ(Index + 1).SetFocus
+                Else
+                    txtLPZ(10).SetFocus
+                End If
+            End If
+        Case vbKeyLeft
+            If Index > 0 Then
+                txtTimeLPZ(Index).SetFocus
+            End If
+        Case vbKeyRight
+            If (Index < 10) And (TablesVisible = 3) Then
+                If Index > 0 Then
+                    txtTimeLPZ(Index + 10).SetFocus
+                End If
+            End If
+    End Select
+End Sub
+
+Private Sub txtTimeEAB_Change(Index As Integer)
+    DataModify = True
+End Sub
+
+Private Sub txtTimeEAB_GotFocus(Index As Integer)
+    SetSelect txtTimeEAB(Index)
+End Sub
+
+Private Sub txtEAB_Change(Index As Integer)
+    DataModify = True
+End Sub
+
+Private Sub txtEAB_GotFocus(Index As Integer)
+    SetSelect txtEAB(Index)
+End Sub
+
+Private Sub txtTimeEAB_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+On Error Resume Next
+
+     Select Case KeyCode
+        Case vbKeyUp
+            If Index > 0 Then
+                txtTimeEAB(Index - 1).SetFocus
+            Else
+                txtTimeEAB(9).SetFocus
+            End If
+        Case vbKeyDown
+            If Index < 9 Then
+                txtTimeEAB(Index + 1).SetFocus
+            Else
+                txtTimeEAB(0).SetFocus
+            End If
+        Case vbKeyRight
+            txtEAB(Index).SetFocus
+    End Select
+End Sub
+
+Private Sub txtTimeLPZ_Change(Index As Integer)
+    DataModify = True
+End Sub
+
+Private Sub txtTimeLPZ_GotFocus(Index As Integer)
+    SetSelect txtTimeLPZ(Index)
+End Sub
+
+Private Sub txtLPZ_Change(Index As Integer)
+    DataModify = True
+End Sub
+
+Private Sub txtLPZ_GotFocus(Index As Integer)
+    SetSelect txtLPZ(Index)
+End Sub
+
+Private Sub txtTimeLPZ_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+On Error Resume Next
+
+     Select Case KeyCode
+        Case vbKeyUp
+            If Index < 10 Then
+                If Index > 1 Then
+                    txtTimeLPZ(Index - 1).SetFocus
+                Else
+                    txtTimeLPZ(9).SetFocus
+                End If
+            Else
+                If Index > 11 Then
+                    txtTimeLPZ(Index - 1).SetFocus
+                Else
+                    txtTimeLPZ(19).SetFocus
+                End If
+            End If
+        Case vbKeyDown
+            If Index < 10 Then
+                If Index < 9 Then
+                    txtTimeLPZ(Index + 1).SetFocus
+                Else
+                    txtTimeLPZ(0).SetFocus
+                End If
+            Else
+                If Index < 19 Then
+                    txtTimeLPZ(Index + 1).SetFocus
+                End If
+            End If
+        Case vbKeyLeft
+            If Index < 10 Then
+                txtEAB(Index).SetFocus
+            Else
+                txtLPZ(Index - 10).SetFocus
+            End If
+        Case vbKeyRight
+            txtLPZ(Index).SetFocus
+    End Select
+End Sub
+
+Private Sub cboXQName_Click()
+Dim i As Integer
+
+    If DisableList Then Exit Sub
+    
+    If XQModify Then
+        With cboXQName
+            'Check previously displayed table
+            VerifyXQTable CurrentXQIndex
+            DataModify = True
+        End With
+    End If
+    
+    For i = 0 To 9
+        txtTimeXQ(i) = ""
+        txtXQ(i) = ""
+    Next
+    
+    With cboXQName
+        CurrentXQIndex = .ItemData(.ListIndex)
+        With XQArr(CurrentXQIndex).dlXQ
+            For i = 1 To .Count
+                txtTimeXQ(i - 1) = .times(i)
+                txtXQ(i - 1) = ZeroFormat(.Data(i), FloatFormat)
+            Next
+        End With
+    End With
+    XQModify = False
+End Sub
+
+Private Sub cmdAddOnsite_Click()
+'We skip empty offsite data arrays, if #3 is empty, store to #4, but display it as #3, etc.
+Dim NewName As String
+Dim Left As Single
+Dim Top As Single
+Dim Index As Integer
+Dim i As Integer, j As Integer
+
+On Error GoTo AddOnsiteError
+
+    cmdAddOnsite.Enabled = False
+    j = 2 'Modified JCK 7/2006
+    'Elements 1 & 2 have default names
+    If XQArr(3).Name <> "" Then
+        j = j + 1
+    End If
+    
+    For i = 4 To MaxPathXQ + 1
+        If XQArr(i).Name = "" Then
+            'Found a blank element
+            Exit For
+        End If
+        j = j + 1
+    Next
+    
+    If j > MaxPathXQ + 1 Then
+        'Found all array elements occupied (#3 would be blank in this case)
+        MsgBox MaxPathXQ & " X/Q tables exist", vbExclamation, "Overflow"
+        Exit Sub
+    ElseIf j = MaxPathXQ + 1 Then
+        'Found last, optional element, empty
+        'If #3 is blank we can use the extra one
+        If XQArr(3).Name <> "" Then
+            MsgBox MaxPathXQ & " X/Q tables exist", vbExclamation, "Overflow"
+            Exit Sub
+        End If
+    End If
+    
+    Left = Me.Left + fraXQ.Left
+    Top = Me.Top + fraXQ.Top
+    NewName = InputBox("Name of new X/Q table?", "Add X/Q Table", , Left, Top)
+    
+    If NewName = "" Then
+        cmdAddOnsite.Enabled = True
+    Else
+        j = j + 1
+        Index = i
+            
+        With cboXQName
+            'If the currently visible X/Q table has been changed, save it
+            If XQModify And (.ListIndex >= 0) Then
+                If VerifyXQTable(.ItemData(.ListIndex)) Then
+                    DataModify = True
+                End If
+            End If
+    
+            .AddItem j & "-" & NewName
+            .ItemData(.NewIndex) = Index
+            .ListIndex = .NewIndex
+            CurrentXQIndex = Index
+        End With
+        
+        XQCount = j
+        XQArr(Index).Name = NewName
+        txtTimeXQ(0) = SourceTerm.DelayTime
+        
+        If cboXQName.ListCount = 1 Then
+            EnableXQTable
+        End If
+        If cboXQName.ListCount > 0 Then
+            txtXQ(0).SetFocus
+        End If
+        cmdDeleteTable.Enabled = True
+        DataModify = True
+    End If
+    Exit Sub
+    
+AddOnsiteError:
+    MsgBox Err.Description, vbExclamation, "cmdAddOnsite()"
+End Sub
+
+Private Sub cmdDeleteTable_Click()
+'Deletes an onsite path-dependent X/Q table
+Dim Response As VbMsgBoxResult
+Dim Deletion As Integer
+Dim pDash As Integer
+Dim DisplayName As String
+Dim i As Integer, j As Integer
+
+On Error GoTo DeleteError
+
+    pDash = InStr(cboXQName.Text, "-")
+    DisplayName = Right(cboXQName.Text, Len(cboXQName.Text) - pDash) & " table"
+    Response = MsgBox("Delete " & DisplayName & " ?", vbYesNo Or vbQuestion, "Delete X/Q Table")
+        
+    
+    If Response = vbYes Then
+        With cboXQName
+            If .ListIndex >= 0 Then
+                'Allow for 2-place numbers in list
+                i = InStr(.List(.ListIndex), "-")
+                Deletion = val(Left(.List(.ListIndex), i - 1))
+                j = .ItemData(.ListIndex)
+            End If
+                    
+            With XQArr(j)
+                .Name = "" 'To mark unused
+                .Number = 0
+                With .dlXQ
+                    .Model = 0
+                    .Count = 0
+                    For i = 0 To 9
+                        .times(i) = 0
+                        .Data(i) = 0
+                    Next
+                End With
+            End With
+            
+            RefreshXQList
+
+            For i = 0 To 9
+                txtTimeXQ(i) = ""
+                txtTimeXQ(i).Enabled = False
+                txtXQ(i) = ""
+                txtXQ(i).Enabled = False
+            Next
+            
+            If .ListCount > 0 Then
+                'RefreshXQList set CurrentXQIndex
+                With XQArr(CurrentXQIndex).dlXQ
+                    For i = 1 To .Count
+                        txtTimeXQ(i - 1) = .times(i)
+                        txtXQ(i - 1) = ZeroFormat(.Data(i), FloatFormat)
+                    Next
+                End With
+            Else
+                cmdDeleteTable.Enabled = False
+            End If
+        End With
+    
+        XQModify = False
+        
+        For i = 1 To XQIndexRows
+            For j = 1 To XQIndexCols
+                With Grid
+                    If val(.TextMatrix(i, j)) = Deletion Then
+                    'Delete from the Grid display and the data array
+                        .Row = i
+                        .Col = j
+                        .Text = ""
+                    End If
+                End With
+            Next
+        Next
+
+        
+        'If user deletes last table then renumbering is not necessary
+        If Deletion < XQCount Then
+            RenumberXQTables Deletion, True
+        End If
+        
+        XQCount = XQCount - 1
+                
+        DataModify = True
+        XQModify = False
+    End If
+    Exit Sub
+    
+DeleteError:
+    MsgBox Err.Description, vbExclamation, "cmdDeleteTable()"
+End Sub
+
+Private Sub RefreshXQList()
+Dim Index As Integer
+Dim i As Integer
+
+On Error GoTo ListError
+
+    'Keep EAB and LPZ indexes available
+    Index = 2
+    With XQArr(3)
+        If .Name <> "" And .dlXQ.Count > 0 Then
+            Index = Index + 1
+        End If
+    End With
+    
+    cboXQName.Clear
+
+    For i = 4 To MaxPathXQ + 1
+        With XQArr(i)
+            If .Name <> "" Then
+                Index = Index + 1
+                With cboXQName
+                    .AddItem Index & "-" & XQArr(i).Name
+                    'List doesn't include empty array members
+                    .ItemData(.NewIndex) = i
+                    'ItemData holds real array index
+                End With
+            End If
+        End With
+    Next
+    With cboXQName
+        If TableIndex > 0 Then
+            For i = 0 To .ListCount - 1
+                If .ItemData(i) = TableIndex Then
+                    .ListIndex = i
+                    Exit For
+                End If
+            Next
+        ElseIf .ListCount > 0 Then
+            .ListIndex = 0
+        End If
+        If .ListIndex >= 0 Then
+            CurrentXQIndex = .ItemData(.ListIndex)
+        End If
+    End With
+    Exit Sub
+
+ListError:
+    MsgBox Err.Description, vbExclamation, "RefreshXQList()"
+End Sub
+
+Private Sub ShowInflowPaths(Env As Integer)
+'Find pathways that intake from Environment
+'Write column headers for table
+Dim i As Integer
+
+    ColumnItems = 0
+    With Grid
+        For i = 1 To MaxPathways
+            If PathwayArr(i).FromComp = Env Then
+                .Row = 0
+                ColumnItems = ColumnItems + 1
+                .Col = ColumnItems
+                .ColData(ColumnItems) = i
+                .Text = i & " " & PathwayArr(i).Name
+                .CellAlignment = flexAlignLeftCenter
+            End If
+        Next
+    End With
+End Sub
+
+Public Sub WriteGridCell(Data As String)
+    Grid.Text = Data
+    Grid.CellAlignment = flexAlignCenterCenter
+    Grid.CellFontBold = True
+End Sub
+
+Private Sub EnableXQTable()
+Dim i As Integer
+
+    fraXQ.Enabled = True
+    For i = 0 To 9
+        txtXQ(i).BackColor = vbWindowBackground
+        txtXQ(i).BorderStyle = 1
+        txtXQ(i).Enabled = True
+        txtTimeXQ(i).BackColor = vbWindowBackground
+        txtTimeXQ(i).BorderStyle = 1
+        txtTimeXQ(i).Enabled = True
+        lblNum(i).ForeColor = vbWindowText
+    Next
+
+    lblTime.ForeColor = vbWindowText
+    lblXQ.ForeColor = vbWindowText
+    cmdDeleteTable.Enabled = True
+End Sub
+
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If lblHover1.Visible Then
+        lblHover1.Visible = False
+        lblTo.Visible = False
+        lblHover2.Visible = False
+    End If
+    ToolMessage = False
+    cmdAddOnsite.Enabled = True
+    CheckClipboard
+End Sub
+
+Private Sub Form_Unload(cancel As Integer)
+    If ToolMessage Then
+        Unload frmToolMessage
+    End If
+End Sub
+
+Private Sub Grid_Click()
+Dim CurrentXQ As String
+Dim Parse() As String
+
+    If fNoClick Then
+        fNoClick = False
+    ElseIf cboXQName.ListIndex >= 0 And (RowItems > 0) And (ColumnItems > 0) Then
+        With cboXQName
+            'Get virtual list number from list entry - could be 10, so parse on dash
+            Parse = Split(.List(.ListIndex), "-")
+            CurrentXQ = Parse(0)
+        End With
+        With Grid
+            If (.CellBackColor <> vbButtonFace) And Not (.Row = 0 And .Col = 0) Then
+              If .Row <= RowItems And .Col <= ColumnItems Then 'JCK 7/2006
+                If .Text = CurrentXQ Then
+                    .Text = ""
+                Else
+                    'Display number of X/Q table currently shown in listbox
+                    WriteGridCell CurrentXQ
+                End If
+                DataModify = True
+            End If
+          End If
+        End With
+    End If
+End Sub
+
+Private Sub Grid_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Dim Text As String
+Dim Index As Integer
+Dim i As Integer
+
+    If (Button And vbRightButton) > 0 Then
+        If MouseRow > 0 And MouseCol > 0 Then
+            Text = Grid.TextMatrix(MouseRow, MouseCol)
+            With cboXQName
+                For i = 0 To .ListCount - 1
+                    If Left(.List(i), 1) = Text Then
+                        .ListIndex = i
+                        Exit For
+                    End If
+                Next
+            End With
+        End If
+        fNoClick = True
+    End If
+End Sub
+
+Private Sub Grid_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Dim ViewRow As Long
+Dim ViewCol As Long
+Dim Row As Long
+Dim Col As Long
+Dim Data1 As Long
+Dim Data2 As Long
+Dim Index As Integer
+Dim PrevRow As Long
+Dim PrevCol As Long
+
+On Error GoTo MoveError
+
+  With Grid
+    ViewRow = Y \ .RowHeight(0)
+    ViewCol = X \ .ColWidth(0)
+    
+    If ViewRow > 0 Then
+        Row = ViewRow + .TopRow - 1
+    Else
+        Row = 0
+    End If
+    If ViewCol > 0 Then
+        Col = ViewCol + .LeftCol - 1
+    Else
+        Col = 0
+    End If
+
+    'Save mouse position for MouseDown()
+    MouseRow = Row
+    MouseCol = Col
+
+    If Row > 0 And Col > 0 Then
+        With Grid
+            'Set tooltip if cell under the cursor is populated
+            PrevRow = .Row
+            PrevCol = .Col
+            .HighLight = flexHighlightNever
+            .Row = MouseRow
+            .Col = MouseCol
+            If .CellBackColor = vbButtonFace Then
+                .ToolTipText = ""
+            ElseIf Row <= RowItems And Col <= ColumnItems Then
+                Index = val(.TextMatrix(MouseRow, MouseCol))
+                If Index = 0 Then
+                    .ToolTipText = "Click to set X/Q table"
+                ElseIf Left(cboXQName.Text, 1) = .TextMatrix(MouseRow, MouseCol) Then
+                    .ToolTipText = "Click to remove X/Q table"
+                Else
+                    .ToolTipText = "Right-click to view X/Q table"
+                End If
+            ElseIf Not ToolMessage Then
+                Load frmToolMessage
+                With frmToolMessage
+                    .Top = Me.Top + Grid.Top + Y
+                    .Left = Me.Left + Grid.Left + X - (.Width / 2)
+                    .Message = "Vertical entries are paths to the environment." _
+                                & " Horizontal entries are paths from the environment." _
+                                & " Table entries are the X/Q tables that represent the" _
+                                & " path combination. Values can only be entered in the table" _
+                                & " (or removed) for the path dependent X/Q table currently displayed."
+                    .Timer1.Interval = 8000
+                End With
+                ToolMessage = True
+            End If
+            .Row = PrevRow
+            .Col = PrevCol
+            .HighLight = flexHighlightWithFocus
+        End With
+        'Show both pathway names
+        If XQCount > 0 Then
+            Data1 = .RowData(Row)
+            Data2 = .ColData(Col)
+            If Data1 > 0 And Data2 > 0 Then
+                DisplayHoverData Data1, Data2
+            Else
+                lblHover1.Visible = False
+                lblHover2.Visible = False
+                lblTo.Visible = False
+            End If
+        Else
+            lblHover1.Visible = False
+            lblHover2.Visible = False
+            lblTo.Visible = False
+        End If
+    ElseIf Row > 0 Then
+        'Show exhaust pathway name
+        Data1 = .RowData(Row)
+        If Data1 > 0 Then
+            DisplayHoverData Data1
+        End If
+    ElseIf Col > 0 Then
+        'Show Inflow pathway name
+        Data1 = .ColData(Col)
+        If Data1 > 0 Then
+            DisplayHoverData Data1
+        End If
+    Else
+        lblHover1.Visible = False
+        lblHover2.Visible = False
+        lblTo.Visible = False
+    End If
+  End With
+  Exit Sub
+  
+MoveError:
+End Sub
+
+Private Sub DisplayHoverData(nFrom As Long, Optional nTo)
+
+On Error GoTo HoverError
+
+    With lblHover1
+        .Caption = Trim(PathwayArr(nFrom).Name)
+        .Left = Grid.Left + (Grid.Width - .Width) / 2
+        If Not .Visible Then
+            .Visible = True
+        End If
+    End With
+    
+    If IsMissing(nTo) Then
+        lblTo.Visible = False
+        lblHover2.Visible = False
+    Else
+        With lblHover2
+            .Caption = Trim(PathwayArr(nTo).Name)
+            .Left = Grid.Left + (Grid.Width - lblHover2.Width) / 2
+            If Not .Visible Then
+                .Visible = True
+                lblTo.Visible = True
+            End If
+        End With
+    End If
+    
+    DoEvents
+    Exit Sub
+    
+HoverError:
+End Sub
+
+Private Sub txtTimeXQ_Change(Index As Integer)
+  DataModify = True
+  XQModify = True
+End Sub
+
+Private Sub txtTimeXQ_GotFocus(Index As Integer)
+  SetSelect txtTimeXQ(Index)
+  cmdAddOnsite.Enabled = False
+End Sub
+
+Private Function VerifyXQTable(Index As Integer) As Boolean
+'Verify the current visible onsite table before displaying another, or Save
+Dim TestTimes(10) As Single
+Dim temp As String
+Dim i As Integer
+
+On Error GoTo SaveXQError
+
+    If cboXQName.ListIndex >= 0 Then
+        With XQArr(Index).dlXQ
+            If .Count > 0 Then
+                For i = 1 To MaxDimen
+                    If txtTimeXQ(i - 1) = "" And txtXQ(i - 1) = "" Then
+                        .Count = i - 1
+                        ReDim .times(1 To .Count), .Data(1 To .Count)
+                        Exit For
+                    End If
+                Next
+    
+                .Model = 1
+                For i = 1 To .Count
+                    temp = txtTimeXQ(i - 1)
+                    If IsNumeric(temp) Or temp = "" Then
+                        If temp = "" Then temp = "0"
+                        
+                        TestTimes(i) = CSng(temp)
+                        If i > 1 Then
+                            If TestTimes(i) <= TestTimes(i - 1) Then
+                                temp = "Invalid timestep"
+                                txtTimeXQ(i - 1).SetFocus
+                                Exit For
+                            Else
+                                .times(i) = CSng(temp)
+                            End If
+                        End If
+                        
+                        temp = txtXQ(i - 1)
+                        If IsNumeric(temp) Or temp = "" Then
+                            If temp = "" Then temp = "0"
+                            .times(i) = TestTimes(i)
+                            .Data(i) = CSng(temp)
+                        Else
+                            temp = "Non-numeric value"
+                            txtXQ(i - 1).SetFocus
+                            Exit For
+                        End If
+                    Else
+                        temp = "Non-numeric Time value"
+                        txtTimeXQ(i - 1).SetFocus
+                        Exit For
+                    End If
+                Next
+            End If
+        End With
+        
+        If IsNumeric(temp) Then
+            VerifyXQTable = True
+            cmdAddOnsite.Enabled = True
+            XQModify = False
+        Else
+            MsgBox temp, vbExclamation, "Entry Error"
+            VerifyXQTable = False
+        End If
+    End If
+    Exit Function
+    
+SaveXQError:
+    MsgBox Err.Description, vbExclamation, "VerifyXQTable()"
+    Exit Function
+    Resume Next
+End Function
+
+
+Private Sub txtTimeXQ_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+On Error Resume Next
+
+     Select Case KeyCode
+        Case vbKeyUp
+            If Index > 1 Then
+                txtTimeXQ(Index - 1).SetFocus
+            End If
+        Case vbKeyDown
+            If Index < 9 Then
+                txtTimeXQ(Index + 1).SetFocus
+            Else
+                txtTimeXQ(1).SetFocus
+            End If
+        Case vbKeyRight
+            txtXQ(Index).SetFocus
+    End Select
+End Sub
+
+Private Sub txtXQ_Change(Index As Integer)
+  DataModify = True
+  XQModify = True
+End Sub
+
+Private Sub txtXQ_GotFocus(Index As Integer)
+  SetSelect txtXQ(Index)
+  cmdAddOnsite.Enabled = False
+End Sub
+
+Private Sub txtTimeXQ_LostFocus(Index As Integer)
+    SaveNewTable
+    cmdAddOnsite.Enabled = False
+End Sub
+
+Private Sub txtXQ_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+On Error Resume Next
+
+     Select Case KeyCode
+        Case vbKeyUp
+            If Index > 0 Then
+                txtXQ(Index - 1).SetFocus
+            Else
+                txtXQ(9).SetFocus
+            End If
+        Case vbKeyDown
+            If Index < 9 Then
+                txtXQ(Index + 1).SetFocus
+            Else
+                txtXQ(0).SetFocus
+            End If
+        Case vbKeyLeft
+            If Index > 0 Then
+                txtTimeXQ(Index).SetFocus
+            End If
+    End Select
+End Sub
+
+Private Sub txtXQ_LostFocus(Index As Integer)
+    SaveNewTable
+    cmdAddOnsite.Enabled = True
+End Sub
+
+Private Sub SaveNewTable()
+'Add an onsite X/Q table
+Dim Index As Integer
+Dim Msg As String
+Dim i As Integer, j As Integer
+
+On Error GoTo NewTableError
+
+    With cboXQName
+        If .ListIndex = -1 Then Exit Sub
+        Index = .ItemData(.ListIndex)
+    End With
+    
+    With XQArr(Index).dlXQ
+        ReDim .times(MaxDimen)
+        ReDim .Data(MaxDimen)
+        For i = 1 To 10
+            If txtTimeXQ(i - 1) = "" Or txtXQ(i - 1) = "" Then
+                Exit For
+            End If
+            j = 1
+            .times(i) = CSng(txtTimeXQ(i - 1))
+            j = 2
+            .Data(i) = CSng(txtXQ(i - 1))
+        Next
+        .Count = i - 1
+    End With
+    Exit Sub
+    
+NewTableError:
+    Select Case j
+        Case 1, 2
+            Msg = "Bad entry: ["
+            If j = 1 Then
+                Msg = Msg & txtTimeXQ(i - 1)
+            Else
+                Msg = Msg & txtXQ(i - 1)
+            End If
+            MsgBox Err.Description & vbCrLf & Msg & "]", vbExclamation, "SaveNewTable()"
+        Case Else
+            MsgBox Err.Description, vbExclamation, "SaveNewTable()"
+    End Select
+    Exit Sub
+    Resume Next
+End Sub
+

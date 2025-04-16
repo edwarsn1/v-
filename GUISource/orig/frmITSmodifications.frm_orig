@@ -1,0 +1,50 @@
+VERSION 5.00
+Begin VB.Form frmITSmodifications 
+   AutoRedraw      =   -1  'True
+   BackColor       =   &H8000000E&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "ITS Modification Summary"
+   ClientHeight    =   6225
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   7290
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   6225
+   ScaleWidth      =   7290
+   StartUpPosition =   3  'Windows Default
+   Begin VB.Label lbl310 
+      BackColor       =   &H80000005&
+      Caption         =   $"frmITSmodifications.frx":0000
+      Height          =   1935
+      Left            =   240
+      TabIndex        =   2
+      Top             =   120
+      Width           =   6735
+      WordWrap        =   -1  'True
+   End
+   Begin VB.Label lbl303 
+      BackColor       =   &H80000005&
+      Caption         =   $"frmITSmodifications.frx":02CB
+      Height          =   1935
+      Left            =   240
+      TabIndex        =   1
+      Top             =   2160
+      Width           =   6735
+   End
+   Begin VB.Label lbl302 
+      BackColor       =   &H8000000E&
+      Caption         =   $"frmITSmodifications.frx":0584
+      Height          =   1935
+      Left            =   360
+      TabIndex        =   0
+      Top             =   4200
+      Width           =   6375
+   End
+End
+Attribute VB_Name = "frmITSmodifications"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False

@@ -1,0 +1,368 @@
+VERSION 5.00
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
+Begin VB.Form frmPowersDep 
+   AutoRedraw      =   -1  'True
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "Compartment Features: Natural Deposition"
+   ClientHeight    =   6480
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   6345
+   BeginProperty Font 
+      Name            =   "MS Sans Serif"
+      Size            =   9.75
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   6480
+   ScaleWidth      =   6345
+   StartUpPosition =   3  'Windows Default
+   Begin VB.CommandButton cmdCancel 
+      Caption         =   "&Reset"
+      Height          =   375
+      Left            =   4560
+      TabIndex        =   15
+      ToolTipText     =   "Restore original data"
+      Top             =   240
+      Width           =   1335
+   End
+   Begin VB.Frame fraReAccType 
+      Caption         =   "Reactor and Accident Type"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   3015
+      Left            =   480
+      TabIndex        =   8
+      Top             =   2040
+      Width           =   3735
+      Begin VB.OptionButton optRAType 
+         Caption         =   "APWR - Design Basis Accident"
+         Height          =   375
+         Index           =   4
+         Left            =   360
+         TabIndex        =   14
+         ToolTipText     =   "Includes effect of cooled containment walls"
+         Top             =   2400
+         Width           =   3255
+      End
+      Begin VB.OptionButton optRAType 
+         Caption         =   "BWR - Severe Accident"
+         Height          =   375
+         Index           =   3
+         Left            =   360
+         TabIndex        =   13
+         ToolTipText     =   "Not used in NRC regulatory space"
+         Top             =   1920
+         Width           =   2775
+      End
+      Begin VB.OptionButton optRAType 
+         Caption         =   "BWR - Design Basis Accident"
+         Height          =   375
+         Index           =   2
+         Left            =   360
+         TabIndex        =   12
+         Top             =   1440
+         Width           =   3255
+      End
+      Begin VB.OptionButton optRAType 
+         Caption         =   "PWR - Severe Accident"
+         Height          =   375
+         Index           =   1
+         Left            =   360
+         TabIndex        =   11
+         ToolTipText     =   "Not used in NRC regulatory space"
+         Top             =   960
+         Width           =   2895
+      End
+      Begin VB.OptionButton optRAType 
+         Caption         =   "PWR - Design Basis Accident"
+         Height          =   375
+         Index           =   0
+         Left            =   360
+         TabIndex        =   10
+         Top             =   480
+         Value           =   -1  'True
+         Width           =   3135
+      End
+   End
+   Begin VB.Frame fraPercentile 
+      Caption         =   "Percentile"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   735
+      Left            =   480
+      TabIndex        =   4
+      ToolTipText     =   "10% represents minimum decontamination"
+      Top             =   1200
+      Width           =   3735
+      Begin VB.OptionButton optPercentile 
+         Caption         =   "90%"
+         Height          =   255
+         Index           =   2
+         Left            =   2520
+         TabIndex        =   7
+         Top             =   360
+         Width           =   855
+      End
+      Begin VB.OptionButton optPercentile 
+         Caption         =   "50%"
+         Height          =   240
+         Index           =   1
+         Left            =   1380
+         TabIndex        =   6
+         Top             =   360
+         Width           =   855
+      End
+      Begin VB.OptionButton optPercentile 
+         Caption         =   "10%"
+         Height          =   255
+         Index           =   0
+         Left            =   240
+         TabIndex        =   5
+         Top             =   360
+         Value           =   -1  'True
+         Width           =   855
+      End
+   End
+   Begin VB.CommandButton cmdExit 
+      Caption         =   "&OK"
+      Height          =   375
+      Left            =   4560
+      TabIndex        =   3
+      ToolTipText     =   "Save data and close"
+      Top             =   720
+      Width           =   1335
+   End
+   Begin ComctlLib.StatusBar StatusBar1 
+      Align           =   2  'Align Bottom
+      Height          =   375
+      Left            =   0
+      TabIndex        =   2
+      Top             =   6105
+      Width           =   6345
+      _ExtentX        =   11192
+      _ExtentY        =   661
+      Style           =   1
+      SimpleText      =   ""
+      _Version        =   327682
+      BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
+         NumPanels       =   1
+         BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
+            Object.Tag             =   ""
+         EndProperty
+      EndProperty
+   End
+   Begin VB.Shape Shape1 
+      Height          =   895
+      Left            =   480
+      Top             =   5040
+      Width           =   3735
+   End
+   Begin VB.Label lblData 
+      BackStyle       =   0  'Transparent
+      Caption         =   "This model was developed for PWR Containments and BWR Drywells"
+      Height          =   775
+      Index           =   2
+      Left            =   1320
+      TabIndex        =   9
+      Top             =   5160
+      Width           =   2655
+   End
+   Begin VB.Image Image1 
+      Height          =   330
+      Left            =   720
+      Picture         =   "frmPowersDep.frx":0000
+      Stretch         =   -1  'True
+      ToolTipText     =   "Restriction"
+      Top             =   5280
+      Width           =   360
+   End
+   Begin VB.Label lblData 
+      AutoSize        =   -1  'True
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   1
+      Left            =   120
+      TabIndex        =   1
+      Top             =   720
+      Width           =   4875
+   End
+   Begin VB.Label lblData 
+      AutoSize        =   -1  'True
+      Caption         =   "Compartment Features: Natural Deposition"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   0
+      Left            =   120
+      TabIndex        =   0
+      Top             =   120
+      Width           =   4410
+   End
+End
+Attribute VB_Name = "frmPowersDep"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Dim DataModify As Boolean
+Dim IgnoreModify As Boolean
+Dim CurrentIndex As Integer
+Dim ThisCompartment As Integer ' current index of CompartmentArr
+Dim ValidPercentiles(0 To 2)
+
+Private Sub cmdCancel_Click()
+ IgnoreModify = True
+ InitControls
+' Unload Me
+End Sub
+
+Private Sub cmdExit_Click()
+
+  IgnoreModify = False
+
+ Unload Me
+End Sub
+
+Private Sub Form_Activate()
+  SetControlColor Me
+End Sub
+
+Private Sub Form_Load()
+  ValidPercentiles(0) = 10
+  ValidPercentiles(1) = 50
+  ValidPercentiles(2) = 90
+  CurrentIndex = frmCompartment.CurrentIndex
+  InitControls
+  DataModify = False
+  IgnoreModify = False
+End Sub
+
+Private Sub Form_QueryUnload(cancel As Integer, UnloadMode As Integer)
+  If DataModify And Not IgnoreModify Then
+    SaveData
+    frmRadtrad.SaveState True
+  End If
+End Sub
+
+Private Sub optPercentile_Click(Index As Integer)
+  DataModify = True
+End Sub
+
+Public Sub SaveData()
+ Dim i
+'1 = PWR DBA 2=PWRSA 3=BWRDBA 4=BWRSA 5=APWRDBA are reactor accident types
+ 
+ With CompartmentArr(CurrentIndex).F2Deposition.Powers
+    For i = 0 To 2
+      If optPercentile(i).Value Then .Percentile = ValidPercentiles(i)
+    Next i
+    
+    For i = 0 To 4
+      If optRAType(i).Value Then .ReactorAccidentType = i + 1
+    Next
+  End With
+End Sub
+
+'Type compartmentrecord
+'  Name As String
+'  Type As Integer
+'  Volume As Single
+'  Features(0 To 3) As Integer
+'  SourceTerm As Boolean ' may not need this
+'  F0Sprays As spraysrecord
+'  F1ReFilters As refilrecord
+'  F2Deposition As depositionrecord
+'  F3OPool As overlyingpoolrecord
+'End Type
+'Type powerssprayrecord 'p. 34
+'  Times() As Single
+'  Flux() As Single
+'  Height() As Single
+'  FracSpray As Single
+'  Percentile As Single
+'End Type
+'Type powerspoolrecord ' p.48
+'  Times() As Single
+'  PoolDepth() As Single
+'  PoolTemp() As Single
+'  Percentile As Single '10, 50, 90
+'End Type
+'Type powersdeprecord 'containment only p.42
+'  ReactorAccidentType() As Integer '1 = PWR DBA 2=PWRSA 3=BWRDBA 4=BWRSA 5=APWRDBA?
+'  Percentile As Single ' 10, 50, 90
+'End Type
+
+
+
+Public Sub InitControls()
+        
+' fill form controls with this particular type of data, from headerrecord in module1.
+    Dim i
+     Dim AControl As Control
+    For Each AControl In Controls
+    If TypeOf AControl Is TextBox Then AControl.Text = ""
+    If TypeOf AControl Is TextBox Or TypeOf AControl Is ComboBox Then
+      AControl.BackColor = vbWhite
+      AControl.ForeColor = vbBlack
+    End If
+  Next
+  
+    lblData(0) = "Compartment " + Format((CurrentIndex)) + ": " + _
+                   CompartmentArr(CurrentIndex).Name
+    lblData(1) = "Powers Aerosol Decontamination Model"
+    With CompartmentArr(CurrentIndex).F2Deposition.Powers
+        If .ReactorAccidentType > 0 Then
+          optRAType(.ReactorAccidentType - 1) = True
+        End If
+        Select Case .Percentile
+          Case 10:
+            optPercentile(0).Value = True
+          Case 50:
+            optPercentile(1).Value = True
+          Case 90:
+            optPercentile(2).Value = True
+        End Select
+    End With
+End Sub
+
+Private Sub optRAType_Click(Index As Integer)
+ DataModify = True
+End Sub

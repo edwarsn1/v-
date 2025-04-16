@@ -1,0 +1,25 @@
+ Release Fraction and Timing Name:
+ PWR, RG 1.183, Table 2 Section 3.2
+ Duration (h):  Design Basis Accident
+  0.5000E+00  0.1300E+01  0.0000E+00  0.0000E+00
+ Noble Gases:
+  0.5000E-01  0.9500E+00  0.0000E+00  0.0000E+00
+ Iodine:
+  0.5000E-01  0.3500E+00  0.0000E+00  0.0000E+00
+ Cesium:
+  0.5000E-01  0.2500E+00  0.0000E+00  0.0000E+00
+ Tellurium:
+  0.0000E+00  0.5000E-01  0.0000E+00  0.0000E+00
+ Strontium:
+  0.0000E+00  0.2000E-01  0.0000E+00  0.0000E+00
+ Barium:
+  0.0000E+00  0.2000E-01  0.0000E+00  0.0000E+00
+ Ruthenium:
+  0.0000E+00  0.2500E-02  0.0000E+00  0.0000E+00
+ Cerium:
+  0.0000E+00  0.5000E-03  0.0000E+00  0.0000E+00
+ Lanthanum:
+  0.0000E+00  0.2000E-03  0.0000E+00  0.0000E+00
+ Non-Radioactive Aerosols (kg):
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+ End of Release File

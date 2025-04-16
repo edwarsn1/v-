@@ -1,0 +1,893 @@
+VERSION 5.00
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
+Begin VB.Form frmCalcOptions 
+   AutoRedraw      =   -1  'True
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "Radtrad Calculation Control Options"
+   ClientHeight    =   8640
+   ClientLeft      =   45
+   ClientTop       =   330
+   ClientWidth     =   7710
+   BeginProperty Font 
+      Name            =   "MS Sans Serif"
+      Size            =   9.75
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   Icon            =   "frmCalcOptions.frx":0000
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   ScaleHeight     =   8640
+   ScaleWidth      =   7710
+   StartUpPosition =   3  'Windows Default
+   Begin VB.Frame Frame2 
+      Caption         =   "Output of Record"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   975
+      Left            =   240
+      TabIndex        =   39
+      Top             =   720
+      Width           =   5775
+      Begin VB.TextBox txtRecord 
+         BackColor       =   &H8000000F&
+         Height          =   375
+         Left            =   240
+         Locked          =   -1  'True
+         TabIndex        =   40
+         Top             =   360
+         Width           =   5295
+      End
+   End
+   Begin MSComDlg.CommonDialog CommonDialog1 
+      Left            =   7080
+      Top             =   3360
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "Output file"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   975
+      Left            =   240
+      TabIndex        =   36
+      Top             =   1920
+      Width           =   6975
+      Begin VB.CommandButton cmdBrowse 
+         Caption         =   "Browse"
+         Height          =   375
+         Left            =   5880
+         TabIndex        =   38
+         Top             =   360
+         Width           =   855
+      End
+      Begin VB.TextBox txtOutput 
+         Height          =   375
+         Left            =   240
+         TabIndex        =   37
+         Top             =   360
+         Width           =   5295
+      End
+   End
+   Begin VB.TextBox txtEndTime 
+      Height          =   375
+      Left            =   4800
+      TabIndex        =   34
+      ToolTipText     =   "RADTRAD calculation will stop at this time "
+      Top             =   3600
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   7
+      Left            =   1680
+      TabIndex        =   29
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   6480
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   8
+      Left            =   1680
+      TabIndex        =   28
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   6840
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   9
+      Left            =   1680
+      TabIndex        =   27
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   7200
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   3
+      Left            =   1680
+      TabIndex        =   26
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   5040
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   4
+      Left            =   1680
+      TabIndex        =   25
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   5400
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   5
+      Left            =   1680
+      TabIndex        =   24
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   5760
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   6
+      Left            =   1680
+      TabIndex        =   23
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   6120
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   2
+      Left            =   1680
+      TabIndex        =   22
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   4680
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   1
+      Left            =   1680
+      TabIndex        =   21
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   4320
+      Width           =   1215
+   End
+   Begin VB.TextBox txtStep 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   0
+      Left            =   1680
+      TabIndex        =   20
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   3960
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   9
+      Left            =   480
+      TabIndex        =   19
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   7200
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   8
+      Left            =   480
+      TabIndex        =   18
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   6840
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   7
+      Left            =   480
+      TabIndex        =   17
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   6480
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   6
+      Left            =   480
+      TabIndex        =   16
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   6120
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   5
+      Left            =   480
+      TabIndex        =   15
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   5760
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   4
+      Left            =   480
+      TabIndex        =   14
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   5400
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   3
+      Left            =   480
+      TabIndex        =   13
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   5040
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   2
+      Left            =   480
+      TabIndex        =   12
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   4680
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Height          =   360
+      Index           =   1
+      Left            =   480
+      TabIndex        =   11
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   4320
+      Width           =   1215
+   End
+   Begin VB.TextBox txtTime 
+      Appearance      =   0  'Flat
+      Enabled         =   0   'False
+      Height          =   360
+      Index           =   0
+      Left            =   480
+      TabIndex        =   10
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   3960
+      Width           =   1215
+   End
+   Begin VB.CommandButton cmdCancel 
+      Caption         =   "&Reset"
+      Height          =   375
+      Left            =   6240
+      TabIndex        =   9
+      ToolTipText     =   "Restore original data"
+      Top             =   360
+      Width           =   1215
+   End
+   Begin ComctlLib.StatusBar StatusBar1 
+      Align           =   2  'Align Bottom
+      Height          =   375
+      Left            =   0
+      TabIndex        =   8
+      Top             =   8265
+      Width           =   7710
+      _ExtentX        =   13600
+      _ExtentY        =   661
+      Style           =   1
+      SimpleText      =   ""
+      _Version        =   327682
+      BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
+         NumPanels       =   1
+         BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
+            Object.Tag             =   ""
+         EndProperty
+      EndProperty
+   End
+   Begin VB.CommandButton cmdExit 
+      Caption         =   "&OK"
+      Height          =   375
+      Left            =   6240
+      TabIndex        =   7
+      ToolTipText     =   "Save data and close"
+      Top             =   960
+      Width           =   1215
+   End
+   Begin VB.Frame fraResults 
+      Caption         =   "Show Results"
+      Height          =   3735
+      Left            =   3480
+      TabIndex        =   0
+      Top             =   4320
+      Width           =   3975
+      Begin VB.CheckBox chkResults 
+         Caption         =   "Edit mass in Ci and exposure in Ci-sec"
+         Height          =   495
+         Index           =   3
+         Left            =   240
+         TabIndex        =   32
+         ToolTipText     =   "Edit mass in Curies (default is in atoms)"
+         Top             =   2800
+         Width           =   3015
+      End
+      Begin VB.CheckBox chkEditResults 
+         Caption         =   "Edit the input"
+         Height          =   495
+         Left            =   240
+         TabIndex        =   31
+         ToolTipText     =   "Edit input (both constant and time dependent values)"
+         Top             =   360
+         Width           =   3135
+      End
+      Begin VB.CheckBox chkResults 
+         Caption         =   "Include runtime model information"
+         Height          =   495
+         Index           =   2
+         Left            =   240
+         TabIndex        =   3
+         ToolTipText     =   "Include results from Powers or Brockmann models"
+         Top             =   2160
+         Width           =   3615
+      End
+      Begin VB.CheckBox chkResults 
+         Caption         =   "For every supplemental time step"
+         Height          =   495
+         Index           =   1
+         Left            =   240
+         TabIndex        =   2
+         ToolTipText     =   "Edit output at each time step generated by the supplemental time control on the left side table"
+         Top             =   1560
+         Width           =   3615
+      End
+      Begin VB.CheckBox chkResults 
+         Caption         =   "For every simulation event"
+         Height          =   495
+         Index           =   0
+         Left            =   240
+         TabIndex        =   1
+         ToolTipText     =   "Edit output at user selected time intervals (all those in input)"
+         Top             =   960
+         Width           =   3135
+      End
+   End
+   Begin VB.Label lblPaste 
+      Alignment       =   2  'Center
+      Caption         =   "Paste"
+      Height          =   255
+      Left            =   1380
+      TabIndex        =   35
+      ToolTipText     =   "Used to copy data from spreadsheets"
+      Top             =   7680
+      Width           =   615
+   End
+   Begin VB.Label lblEndTime 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Accident End Time"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Left            =   4440
+      TabIndex        =   33
+      ToolTipText     =   "RADTRAD calculation will stop at this time "
+      Top             =   3240
+      Width           =   1965
+   End
+   Begin VB.Label lblVersionStamp 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Version Stamp"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Left            =   2760
+      TabIndex        =   30
+      Top             =   240
+      Width           =   1530
+   End
+   Begin VB.Shape Shape1 
+      Height          =   4455
+      Left            =   240
+      Top             =   3600
+      Width           =   2895
+   End
+   Begin VB.Label lblTimes 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Supplemental Time Steps"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   2
+      Left            =   345
+      TabIndex        =   6
+      Top             =   3240
+      Width           =   2685
+   End
+   Begin VB.Label lblTimes 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Time Step"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   1
+      Left            =   1740
+      TabIndex        =   5
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   3660
+      Width           =   1080
+   End
+   Begin VB.Label lblTimes 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Time"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   0
+      Left            =   810
+      TabIndex        =   4
+      ToolTipText     =   "Verify that RADTRAD generated values are reasonable (use a small value like < 0.1 hr)"
+      Top             =   3660
+      Width           =   540
+   End
+End
+Attribute VB_Name = "frmCalcOptions"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Const EDGE = 3960
+Private TheFormEdit As Boolean ' pass or fail the edits
+Private TheEditType As String  ' which edit to do
+Private DataModify As Boolean
+
+Private Sub chkEditResults_Click()
+    DataModify = True
+End Sub
+
+Private Sub chkResults_Click(Index As Integer)
+    DataModify = True
+End Sub
+
+Private Sub cmdBrowse_Click()
+Dim Parse() As String
+Dim DirName As String
+Dim s As String
+Dim i As Integer
+
+On Error GoTo BrowseError
+
+    txtOutput = Trim(txtOutput)
+    With CommonDialog1
+        .DialogTitle = "Output file"
+        .Flags = cdlOFNNoReadOnlyReturn + cdlOFNHideReadOnly '+cdlOFNOverwritePrompt
+        .Filename = txtOutput
+        .CancelError = True
+        
+        If StdOutputFormat(txtOutput) Or txtOutput = "" Then
+            .filter = "Output files (*.o??)|*.o*|All files |*.*"
+        ElseIf txtOutput <> "" Then
+            i = InStrRev(txtOutput, ".")
+            s = Right(txtOutput, Len(txtOutput) - i)
+            If i > 0 Then
+                .filter = "Output files (*." & s & ")|*." & s & "|All files |*.*"
+            Else
+                .filter = "All files |*.*"
+            End If
+        End If
+        
+        If (txtOutput <> "") And InStr(txtOutput, "\") > 0 Then
+            Parse = Split(txtOutput, "\")
+            DirName = Parse(1)
+            For i = 2 To UBound(Parse) - 1
+                DirName = DirName & "\" & Parse(i)
+            Next
+        ElseIf frmRadtrad.SavePath = "" Then
+          .InitDir = App.Path
+        Else
+          .InitDir = frmRadtrad.SavePath
+        End If
+        
+        .ShowOpen
+        txtOutput = .Filename
+    End With
+    Exit Sub
+    
+BrowseError:
+    With Err
+        If .Number <> CancelSelected Then
+            MsgBox .Description, vbExclamation, "cmdBrowse()"
+        End If
+    End With
+End Sub
+
+Private Sub cmdCancel_Click()
+  InitControls
+End Sub
+
+Private Sub cmdExit_Click()
+  Unload Me
+End Sub
+
+Private Sub Form_Activate()
+    CheckClipboard
+End Sub
+
+Private Sub Form_Load()
+  SetTabIndex
+  InitControls
+End Sub
+
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    CheckClipboard
+End Sub
+
+Private Sub Form_QueryUnload(cancel As Integer, UnloadMode As Integer)
+
+    If DataModify Then
+        cancel = EditData
+        If cancel = 0 Then frmRadtrad.SaveState True
+    End If
+End Sub
+
+Private Sub Form_Resize()
+ If WindowState = vbNormal Then
+  Left = frmRadtrad.Left + EDGE
+  Top = frmRadtrad.Top + 2500
+  AdjustToScreen Me
+ End If
+End Sub
+
+Private Sub lblPaste_Click()
+    PasteToTable
+End Sub
+
+Private Sub txtEndTime_Change()
+    DataModify = True
+End Sub
+
+Private Sub txtEndTime_LostFocus()
+    If txtEndTime <> "" Then
+        If val(txtEndTime) <= SourceTerm.DelayTime Then
+            MsgBox "End Time must be greater than Start Time", vbExclamation, "Entry Error"
+        End If
+    End If
+End Sub
+
+Private Sub txtOutput_Change()
+    DataModify = True
+End Sub
+
+Private Sub txtStep_Change(Index As Integer)
+    DataModify = True
+End Sub
+
+Private Sub txtStep_GotFocus(Index As Integer)
+  SetSelect txtStep(Index)
+End Sub
+
+Private Sub txtStep_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+On Error Resume Next
+
+     Select Case KeyCode
+        Case vbKeyUp
+            If Index > 0 Then
+                txtStep(Index - 1).SetFocus
+            Else
+                txtStep(9).SetFocus
+            End If
+        Case vbKeyDown
+            If Index < 9 Then
+                txtStep(Index + 1).SetFocus
+            Else
+                txtStep(0).SetFocus
+            End If
+        Case vbKeyLeft
+            txtTime(Index).SetFocus
+    End Select
+End Sub
+
+Private Sub txtTime_Change(Index As Integer)
+    DataModify = True
+End Sub
+
+Private Sub txtTime_GotFocus(Index As Integer)
+  SetSelect txtTime(Index)
+End Sub
+
+Public Sub InitControls()
+Dim i As Long
+Dim j As Long
+  
+  lblVersionStamp = Appl.VersionStamp
+ 
+  With CalcOptions.SupplementalTimes
+     'ReDim Preserve .CalTimes(1 To MaxDimen) As Single, _
+                    .CalTimeSteps(1 To MaxDimen) As Single
+     For j = 1 To MaxDimen
+       txtTime(j - 1).Tag = "num"
+       txtStep(j - 1).Tag = "num"
+
+        i = MaxDimen - j + 1
+        If i > UBound(.CalTimes) Then
+            txtTime(i - 1).Text = Format(0, TIMEFORM)
+            txtStep(i - 1).Text = Format(0, SCIZERO)
+        Else
+            txtTime(i - 1).Text = Format(.CalTimes(i), TIMEFORM)
+            txtStep(i - 1).Text = ZeroFormat(.CalTimeSteps(i), FloatFormat)
+        End If
+     Next j
+     txtTime(0).Text = SourceTerm.DelayTime
+  End With
+  
+  With CalcOptions
+      txtRecord = Trim(.OutputOfRecord)
+      txtOutput = Trim(.OutputFile)
+      chkResults(0) = .OutputOptions(1)
+      chkResults(1) = .OutputOptions(3)
+      chkResults(2) = .OutputOptions(2)
+      chkResults(3) = .OutputOptions(4)
+      chkEditResults = .OutputOptions(5)
+      If .EndTime = 0 Then
+        .EndTime = 720#
+      End If
+      txtEndTime = .EndTime
+  End With
+  
+  'Always last:
+  DataModify = False
+End Sub
+
+Private Sub CheckClipboard()
+'See if data on the clipboard looks like Excel data - JCK 11/2005
+Dim ValidData As Boolean
+Dim i As Integer
+
+    ValidData = CheckClipboardData
+    If ValidData <> lblPaste.Enabled Then
+        lblPaste.Enabled = ValidData
+    End If
+OK:
+End Sub
+
+Private Sub PasteToTable()
+'JCK 11/2005
+Dim PasteData() As String
+Dim Buffer As String
+Dim nError As Single
+Dim i As Integer, j As Integer
+
+On Error GoTo PastingError
+
+    j = 0
+    nError = -1
+    Buffer = Clipboard.GetText
+    
+    Do
+        i = InStr(Buffer, vbCrLf)
+        PasteData = Split(Left(Buffer, i - 1), vbTab)
+        i = i + 1
+        Buffer = Right(Buffer, Len(Buffer) - i)
+
+        If j = 0 Then
+            If val(txtTime(j).Text) <> val(PasteData(0)) Then
+                nError = val(txtTime(j).Text)
+                Exit Do
+            End If
+        Else
+            txtTime(j).Text = PasteData(0)
+        End If
+        txtStep(j).Text = PasteData(1)
+        j = j + 1
+    Loop Until Buffer = ""
+    
+    If nError >= 0 Then
+        PasteError nError, Me
+    End If
+    
+    txtStep(0).SetFocus
+    Exit Sub
+    
+PastingError:
+    Beep
+End Sub
+
+Public Sub SaveData(ntime)
+Dim i
+    
+    'Appl.CaseTitle = txtTitle.text
+   
+    With CalcOptions.SupplementalTimes
+        ReDim .CalTimes(1 To ntime) As Single, _
+            .CalTimeSteps(1 To ntime) As Single
+        .Count = ntime
+        For i = 1 To .Count
+            If IsNumeric(txtTime(i - 1).Text) Then
+                .CalTimes(i) = CSng(txtTime(i - 1).Text)
+            Else
+                MsgBox "Non-numeric entry", vbExclamation, "Data Error"
+                txtTime(i - 1).SetFocus
+                Exit Sub
+            End If
+            If IsNumeric(txtStep(i - 1).Text) Then
+                .CalTimeSteps(i) = CSng(txtStep(i - 1).Text)
+            Else
+                MsgBox "Non-numeric entry", vbExclamation, "Data Error"
+                txtStep(i - 1).SetFocus
+                Exit Sub
+            End If
+        Next i
+    End With
+    With CalcOptions
+        If Len(txtOutput.Text) > 0 Then
+          .OutputFile = txtOutput
+          frmRadtrad.LoadStatusBar
+        End If
+        .OutputOptions(1) = chkResults(0).Value
+        .OutputOptions(2) = chkResults(2).Value
+        .OutputOptions(3) = chkResults(1).Value
+        .OutputOptions(4) = chkResults(3).Value 'Changed
+        .OutputOptions(5) = chkEditResults.Value 'Changed
+        .EndTime = txtEndTime
+    End With
+End Sub
+
+Public Sub SetTabIndex()
+  Dim i
+  
+  'txtTitle.TabIndex = 0
+  txtTime(0).TabIndex = 0
+  txtStep(0).TabIndex = 1
+
+  For i = 1 To MaxDimen - 1
+    txtTime(i).TabIndex = txtTime(i - 1).TabIndex + 2
+    txtTime(i).Tag = "time"
+    txtStep(i).TabIndex = txtStep(i - 1).TabIndex + 2
+    txtStep(i).Tag = "time"
+  Next i
+End Sub
+
+Public Property Get PassFormEdit() As Boolean
+  PassFormEdit = TheFormEdit
+End Property
+
+Public Property Let PassFormEdit(ByVal vNewValue As Boolean)
+  TheFormEdit = vNewValue
+  If Not TheFormEdit Then
+    ShowErrorMessage EditType, lblTimes(2)
+  End If
+End Property
+
+Public Property Get EditType() As String
+   EditType = TheEditType
+End Property
+
+Public Property Let EditType(ByVal vNewValue As String)
+  TheEditType = vNewValue
+  PassFormEdit = DoFormEdit(Me, TheEditType)
+End Property
+
+Public Function EditData() As Integer
+   Dim cancel As Integer
+   Dim Ntvals
+   
+   cancel = 0
+   EditType = "Numeric"
+    If PassFormEdit Then
+        EditType = "Times"
+        If PassFormEdit Then
+            Ntvals = CInt(Me.Tag) 'number of time values just stored by times edit
+            Me.Tag = ""
+            SaveData (Ntvals)
+            frmRadtrad.SaveState True
+        Else
+           cancel = 1 ' failed numeric edit;  re-edit when OK pressed
+        End If
+    Else
+      cancel = 1 ' failed time edit
+    End If
+    
+    EditData = cancel
+End Function
+
+Private Sub txtTime_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+On Error Resume Next
+
+     Select Case KeyCode
+        Case vbKeyUp
+            If Index > 0 Then
+                txtTime(Index - 1).SetFocus
+            Else
+                txtTime(9).SetFocus
+            End If
+        Case vbKeyDown
+            If Index < 9 Then
+                txtTime(Index + 1).SetFocus
+            Else
+                txtTime(0).SetFocus
+            End If
+        Case vbKeyRight
+            txtStep(Index).SetFocus
+    End Select
+End Sub

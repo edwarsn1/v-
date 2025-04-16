@@ -1,0 +1,52 @@
+ Nuclide Inventory Name:
+ TID-14844 Example Normalized Core Inventory
+ Power Level:
+  0.1000E+01
+ Nuclides:
+   5
+ Nuclide 001:
+ I-131
+   2
+  0.6946560000E+06
+  0.1310E+03
+  0.2453E+05
+ Xe-131m  0.1100E-01
+ none     0.0000E+00
+ none     0.0000E+00
+ Nuclide 002:
+ I-132
+   2
+  0.8280000000E+04
+  0.1320E+03
+  0.9527E+05
+ none     0.0000E+00
+ none     0.0000E+00
+ none     0.0000E+00
+ Nuclide 003:
+ I-133
+   2
+  0.7488000000E+05
+  0.1330E+03
+  0.5651E+05
+ Xe-133m  0.2900E-01
+ Xe-133   0.9700E+00
+ none     0.0000E+00
+ Nuclide 004:
+ I-134
+   2
+  0.3156000000E+04
+  0.1340E+03
+  0.6445E+05
+ none     0.0000E+00
+ none     0.0000E+00
+ none     0.0000E+00
+ Nuclide 005:
+ I-135
+   2
+  0.2379600000E+05
+  0.1350E+03
+  0.5225E+05
+ Xe-135m  0.1500E+00
+ Xe-135   0.8500E+00
+ none     0.0000E+00
+ End of Nuclear Inventory File

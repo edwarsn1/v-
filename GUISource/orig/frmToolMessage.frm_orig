@@ -1,0 +1,86 @@
+VERSION 5.00
+Begin VB.Form frmToolMessage 
+   Appearance      =   0  'Flat
+   BackColor       =   &H80000005&
+   BorderStyle     =   1  'Fixed Single
+   ClientHeight    =   1275
+   ClientLeft      =   15
+   ClientTop       =   15
+   ClientWidth     =   3135
+   ControlBox      =   0   'False
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   Moveable        =   0   'False
+   ScaleHeight     =   1275
+   ScaleWidth      =   3135
+   Begin VB.Timer Timer1 
+      Interval        =   500
+      Left            =   2520
+      Top             =   960
+   End
+   Begin VB.Label Label1 
+      Appearance      =   0  'Flat
+      AutoSize        =   -1  'True
+      BackColor       =   &H80000005&
+      Caption         =   $"frmToolMessage.frx":0000
+      ForeColor       =   &H80000008&
+      Height          =   975
+      Left            =   35
+      TabIndex        =   0
+      Top             =   0
+      Width           =   3135
+      WordWrap        =   -1  'True
+   End
+End
+Attribute VB_Name = "frmToolMessage"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Private ViewStatus As Integer
+Private MoveStatus As Integer
+
+Public Property Let Message(Text As String)
+Dim w As Single
+
+    w = TextWidth(Text)
+    With Label1
+        If w < .Width Then
+            .Width = w
+            Me.Width = w + 55
+            Me.Height = TextHeight(Text)
+        End If
+        Label1 = Text
+        Me.Height = .Height + 55
+        Me.Width = .Width + 55
+    End With
+    Timer1.Interval = 3000
+End Property
+
+Private Sub Form_Load()
+    ViewStatus = 0
+    MoveStatus = 0
+    Timer1.Enabled = True
+End Sub
+
+Private Sub Label1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If ViewStatus = 1 And MoveStatus = 0 Then
+        MoveStatus = 1
+    ElseIf MoveStatus = 1 Then
+        MoveStatus = 0
+        Unload Me
+    End If
+End Sub
+
+Private Sub Timer1_Timer()
+
+    Select Case ViewStatus
+        Case 0
+            Me.Show
+            ViewStatus = ViewStatus + 1
+        Case 1
+            Unload Me
+    End Select
+End Sub

@@ -1,0 +1,2322 @@
+VERSION 5.00
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
+Begin VB.Form frmCompartment 
+   AutoRedraw      =   -1  'True
+   BackColor       =   &H00BDDEEC&
+   BorderStyle     =   1  'Fixed Single
+   Caption         =   "Compartments"
+   ClientHeight    =   7284
+   ClientLeft      =   3456
+   ClientTop       =   336
+   ClientWidth     =   9612
+   BeginProperty Font 
+      Name            =   "MS Sans Serif"
+      Size            =   9.6
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   ScaleHeight     =   7284
+   ScaleWidth      =   9612
+   Begin VB.Frame fradoseLocation 
+      BackColor       =   &H00BDDEEC&
+      Caption         =   "Dose Location"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   855
+      Left            =   4200
+      TabIndex        =   49
+      Top             =   1440
+      Width           =   4455
+      Begin VB.CheckBox chkDoseLocation 
+         BackColor       =   &H00BDDEEC&
+         Caption         =   "Compartment is dose location"
+         Height          =   495
+         Left            =   360
+         TabIndex        =   51
+         ToolTipText     =   "Check this if a dose will be calculated here"
+         Top             =   240
+         Width           =   2055
+      End
+      Begin VB.CommandButton cmdDoseLocation 
+         Caption         =   "Breathing Rate"
+         Height          =   375
+         Left            =   2520
+         TabIndex        =   50
+         ToolTipText     =   "Modify the breathing rates and occupancy factor for the compartment"
+         Top             =   300
+         Width           =   1575
+      End
+   End
+   Begin VB.Frame fraPrint 
+      BackColor       =   &H00BDDEEC&
+      Caption         =   "Output Mode"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   400
+         Underline       =   -1  'True
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1455
+      Left            =   240
+      TabIndex        =   40
+      ToolTipText     =   "Allows the edit of activity, exposure, decay, and deposition by nuclide"
+      Top             =   4920
+      Width           =   2895
+      Begin VB.OptionButton optOutput 
+         BackColor       =   &H00BDDEEC&
+         Caption         =   "Full edit at end only"
+         Height          =   255
+         Index           =   2
+         Left            =   360
+         TabIndex        =   48
+         Top             =   1080
+         Width           =   2415
+      End
+      Begin VB.OptionButton optOutput 
+         BackColor       =   &H00BDDEEC&
+         Caption         =   "Full edit at steps"
+         Height          =   255
+         Index           =   1
+         Left            =   360
+         TabIndex        =   47
+         Top             =   720
+         Width           =   2415
+      End
+      Begin VB.OptionButton optOutput 
+         BackColor       =   &H00BDDEEC&
+         Caption         =   "No additional print"
+         Height          =   255
+         Index           =   0
+         Left            =   360
+         TabIndex        =   46
+         ToolTipText     =   "Determines if radionuclide dose will be printed for this compartment"
+         Top             =   360
+         Value           =   -1  'True
+         Width           =   2415
+      End
+   End
+   Begin VB.CommandButton cmdCancel 
+      Caption         =   "&Reset"
+      Height          =   375
+      Left            =   8040
+      TabIndex        =   38
+      ToolTipText     =   "Restore original data"
+      Top             =   120
+      Width           =   1215
+   End
+   Begin VB.TextBox txtName 
+      Height          =   375
+      Left            =   2280
+      TabIndex        =   0
+      Top             =   120
+      Width           =   1935
+   End
+   Begin VB.CommandButton cmdExit 
+      Caption         =   "&OK"
+      Height          =   375
+      Left            =   8040
+      TabIndex        =   11
+      ToolTipText     =   "Save data and close"
+      Top             =   600
+      Width           =   1215
+   End
+   Begin VB.HScrollBar hsbCurrent 
+      Height          =   255
+      Left            =   5400
+      Max             =   20
+      Min             =   1
+      TabIndex        =   10
+      Top             =   720
+      Value           =   1
+      Width           =   1215
+   End
+   Begin VB.ComboBox cboType 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Left            =   2280
+      Style           =   2  'Dropdown List
+      TabIndex        =   1
+      ToolTipText     =   "Unused=remove, Control Room=exhaust to environment stored separately, Environment=only 1, Normal=standard selection"
+      Top             =   795
+      Width           =   1455
+   End
+   Begin VB.Frame fraFeatures 
+      BackColor       =   &H00BDDEEC&
+      Caption         =   "Compartment Features"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   400
+         Underline       =   -1  'True
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   2125
+      Left            =   240
+      TabIndex        =   3
+      ToolTipText     =   "Determines method(s) of decontamination "
+      Top             =   2520
+      Width           =   2895
+      Begin VB.CheckBox chkFeature 
+         BackColor       =   &H00BDDEEC&
+         Caption         =   "Overlying Pool (source term)"
+         Enabled         =   0   'False
+         Height          =   495
+         Index           =   3
+         Left            =   240
+         TabIndex        =   7
+         Top             =   1480
+         Width           =   1935
+      End
+      Begin VB.CheckBox chkFeature 
+         BackColor       =   &H00BDDEEC&
+         Caption         =   "Natural Deposition"
+         Height          =   375
+         Index           =   2
+         Left            =   240
+         TabIndex        =   6
+         Top             =   1110
+         Width           =   2175
+      End
+      Begin VB.CheckBox chkFeature 
+         BackColor       =   &H00BDDEEC&
+         Caption         =   "Recirculating Filters"
+         Height          =   375
+         Index           =   1
+         Left            =   240
+         TabIndex        =   5
+         Top             =   735
+         Width           =   2175
+      End
+      Begin VB.CheckBox chkFeature 
+         BackColor       =   &H00BDDEEC&
+         Caption         =   "Sprays"
+         Height          =   375
+         Index           =   0
+         Left            =   240
+         TabIndex        =   4
+         Top             =   360
+         Width           =   975
+      End
+   End
+   Begin VB.TextBox txtVolume 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   7.8
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   2280
+      TabIndex        =   2
+      Top             =   1395
+      Width           =   1095
+   End
+   Begin TabDlg.SSTab sstCompartment 
+      Height          =   4095
+      Left            =   3360
+      TabIndex        =   9
+      Top             =   2520
+      Width           =   6015
+      _ExtentX        =   10605
+      _ExtentY        =   7218
+      _Version        =   393216
+      Tabs            =   4
+      Tab             =   1
+      TabsPerRow      =   2
+      TabHeight       =   794
+      BackColor       =   12443372
+      ForeColor       =   8421440
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      TabCaption(0)   =   "&Sprays"
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "fraAerSp(0)"
+      Tab(0).Control(1)=   "fraDataSp"
+      Tab(0).ControlCount=   2
+      TabCaption(1)   =   "Recirculating &Filters"
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "Frame1"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "cmdFilterEff"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).ControlCount=   2
+      TabCaption(2)   =   "Natural &Deposition"
+      Tab(2).ControlEnabled=   0   'False
+      Tab(2).Control(0)=   "fraAerND(2)"
+      Tab(2).Control(1)=   "fraDataND"
+      Tab(2).ControlCount=   2
+      TabCaption(3)   =   " Overlying &Pool"
+      Tab(3).ControlEnabled=   0   'False
+      Tab(3).Control(0)=   "lblWaterVolumeOp"
+      Tab(3).Control(1)=   "fraAerOp(3)"
+      Tab(3).Control(2)=   "fraDataOp"
+      Tab(3).Control(3)=   "txtWaterVolOp"
+      Tab(3).ControlCount=   4
+      Begin VB.Frame fraAerND 
+         Caption         =   "Aerosol Model"
+         Height          =   2175
+         Index           =   2
+         Left            =   -74520
+         TabIndex        =   41
+         Top             =   1320
+         Width           =   1935
+         Begin VB.OptionButton optAerosolModelND 
+            Caption         =   "&Henry"
+            Height          =   375
+            Index           =   1
+            Left            =   240
+            TabIndex        =   44
+            Top             =   1080
+            Width           =   855
+         End
+         Begin VB.OptionButton optAerosolModelND 
+            Caption         =   "&User-defined coefficients"
+            Height          =   615
+            Index           =   0
+            Left            =   240
+            TabIndex        =   43
+            Top             =   360
+            Width           =   1575
+         End
+         Begin VB.OptionButton optAerosolModelND 
+            Caption         =   "&Powers containment"
+            Height          =   495
+            Index           =   2
+            Left            =   240
+            TabIndex        =   42
+            Top             =   1560
+            Width           =   1575
+         End
+      End
+      Begin VB.CommandButton cmdFilterEff 
+         Caption         =   "&Efficiency"
+         Height          =   615
+         Left            =   1080
+         TabIndex        =   34
+         Top             =   2160
+         Width           =   1695
+      End
+      Begin VB.TextBox txtWaterVolOp 
+         Height          =   375
+         Left            =   -72720
+         TabIndex        =   29
+         Top             =   1020
+         Width           =   1335
+      End
+      Begin VB.Frame fraDataSp 
+         Caption         =   "Edit"
+         ForeColor       =   &H00000000&
+         Height          =   2415
+         Left            =   -72360
+         TabIndex        =   27
+         Top             =   1200
+         Width           =   3015
+         Begin VB.CommandButton cmdDataSp 
+            Caption         =   "&User-defined coefficients.."
+            Enabled         =   0   'False
+            Height          =   615
+            Index           =   0
+            Left            =   120
+            TabIndex        =   33
+            Top             =   360
+            Width           =   2760
+         End
+         Begin VB.CommandButton cmdDataSp 
+            Caption         =   "&Aerosol model.."
+            Height          =   1215
+            Index           =   1
+            Left            =   120
+            TabIndex        =   32
+            Top             =   1080
+            Width           =   960
+         End
+         Begin VB.CommandButton cmdDataSp 
+            Caption         =   "&Elemental and organic Iodine.."
+            Height          =   1215
+            Index           =   2
+            Left            =   1080
+            TabIndex        =   31
+            Top             =   1080
+            Width           =   1800
+         End
+      End
+      Begin VB.Frame fraDataOp 
+         Caption         =   "Edit"
+         Height          =   2055
+         Left            =   -72360
+         TabIndex        =   23
+         Top             =   1560
+         Width           =   2775
+         Begin VB.CommandButton cmdDataOp 
+            Caption         =   "&Elemental and organic Iodine.."
+            Height          =   855
+            Index           =   2
+            Left            =   1080
+            TabIndex        =   26
+            Top             =   1080
+            Width           =   1575
+         End
+         Begin VB.CommandButton cmdDataOp 
+            Caption         =   "&Aerosol model.."
+            Height          =   855
+            Index           =   1
+            Left            =   120
+            TabIndex        =   25
+            Top             =   1080
+            Width           =   975
+         End
+         Begin VB.CommandButton cmdDataOp 
+            Caption         =   "&User-defined coefficients...."
+            Enabled         =   0   'False
+            Height          =   615
+            Index           =   0
+            Left            =   120
+            TabIndex        =   24
+            Top             =   360
+            Width           =   2535
+         End
+      End
+      Begin VB.Frame fraAerOp 
+         Caption         =   "Aerosol Model"
+         Height          =   2055
+         Index           =   3
+         Left            =   -74520
+         TabIndex        =   20
+         Top             =   1560
+         Width           =   1935
+         Begin VB.OptionButton optAerosolModelOp 
+            Caption         =   "&User-defined coefficients"
+            Height          =   615
+            Index           =   0
+            Left            =   240
+            TabIndex        =   22
+            Top             =   360
+            Width           =   1575
+         End
+         Begin VB.OptionButton optAerosolModelOp 
+            Caption         =   "&Powers"
+            Height          =   375
+            Index           =   1
+            Left            =   240
+            TabIndex        =   21
+            Top             =   1080
+            Width           =   1455
+         End
+      End
+      Begin VB.Frame fraAerSp 
+         Caption         =   "Aerosol Model"
+         ForeColor       =   &H00000000&
+         Height          =   2415
+         Index           =   0
+         Left            =   -74640
+         TabIndex        =   17
+         Top             =   1200
+         Width           =   2055
+         Begin VB.OptionButton optAerosolModelSp 
+            Caption         =   " &Powers"
+            Height          =   375
+            Index           =   1
+            Left            =   240
+            TabIndex        =   19
+            Top             =   1320
+            Width           =   1335
+         End
+         Begin VB.OptionButton optAerosolModelSp 
+            Caption         =   " &User-defined coefficients"
+            Height          =   615
+            Index           =   0
+            Left            =   240
+            TabIndex        =   18
+            Top             =   480
+            Width           =   1575
+         End
+      End
+      Begin VB.Frame Frame1 
+         Caption         =   "Recirculating Filter Flow Data"
+         Height          =   2175
+         Left            =   600
+         TabIndex        =   39
+         Top             =   1320
+         Width           =   4695
+         Begin VB.CommandButton cmdFilterFailure 
+            Caption         =   "&Filter Failure"
+            Enabled         =   0   'False
+            Height          =   615
+            Left            =   2520
+            TabIndex        =   52
+            ToolTipText     =   "The release of radionuclides at filter failure is not active at this time"
+            Top             =   840
+            Width           =   1695
+         End
+      End
+      Begin VB.Frame fraDataND 
+         Caption         =   "Edit"
+         Height          =   2175
+         Left            =   -72240
+         TabIndex        =   30
+         Top             =   1320
+         Width           =   2655
+         Begin VB.CommandButton cmdDataND 
+            Caption         =   "&Elemental Iodine.."
+            Height          =   840
+            Index           =   2
+            Left            =   960
+            TabIndex        =   37
+            Top             =   1080
+            Width           =   1575
+         End
+         Begin VB.CommandButton cmdDataND 
+            Caption         =   "&Aerosol model.."
+            Height          =   840
+            Index           =   1
+            Left            =   120
+            TabIndex        =   36
+            Top             =   1080
+            Width           =   855
+         End
+         Begin VB.CommandButton cmdDataND 
+            Caption         =   "&User-defined coefficients.."
+            Height          =   615
+            Index           =   0
+            Left            =   120
+            TabIndex        =   35
+            Top             =   360
+            Width           =   2415
+         End
+      End
+      Begin VB.Label lblWaterVolumeOp 
+         AutoSize        =   -1  'True
+         Caption         =   "Water volume (cu ft):  "
+         Height          =   240
+         Left            =   -74640
+         TabIndex        =   28
+         Top             =   1080
+         Width           =   1890
+      End
+   End
+   Begin ComctlLib.StatusBar StatusBar1 
+      Align           =   2  'Align Bottom
+      Height          =   375
+      Left            =   0
+      TabIndex        =   45
+      Top             =   6915
+      Width           =   9615
+      _ExtentX        =   16955
+      _ExtentY        =   656
+      Style           =   1
+      SimpleText      =   ""
+      _Version        =   327682
+      BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
+         NumPanels       =   1
+         BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
+            Object.Tag             =   ""
+         EndProperty
+      EndProperty
+   End
+   Begin VB.Label lblCompart 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Compartment Type:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   4
+      Left            =   195
+      TabIndex        =   16
+      Top             =   825
+      Width           =   2040
+   End
+   Begin VB.Label lblCompart 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Next"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   3
+      Left            =   6720
+      TabIndex        =   15
+      Top             =   720
+      Width           =   480
+   End
+   Begin VB.Label lblCompart 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Previous"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   2
+      Left            =   4320
+      TabIndex        =   14
+      Top             =   720
+      Width           =   930
+   End
+   Begin VB.Label lblCurrent 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "No compartments yet..."
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   13.8
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   4320
+      TabIndex        =   13
+      Top             =   120
+      Width           =   3405
+   End
+   Begin VB.Label lblCompart 
+      Alignment       =   1  'Right Justify
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Volume (cu ft):"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   1
+      Left            =   750
+      TabIndex        =   12
+      Top             =   1455
+      Width           =   1485
+   End
+   Begin VB.Label lblCompart 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Compartment Name:"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.6
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   0
+      Left            =   120
+      TabIndex        =   8
+      Top             =   187
+      Width           =   2115
+   End
+End
+Attribute VB_Name = "frmCompartment"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+Const AER = 0
+Const ELI = 1
+Const ORI = 2
+Const COTitle As String = "Compartments"
+Const EDGE = 3960
+
+'Default values for 1 timestep
+Const DefaultSpray = 0
+Const DefaultFilter = 0
+Const DefaultDeposition = 0
+Const DefaultPool = 1
+
+Private DataModify As Boolean
+Private IgnoreModify As Boolean
+Private DataOwnerType As String
+Private ThisCompartment As Integer
+
+Private TheEditType As String
+Private TheFormEdit As Boolean
+Private DoseLocationIndex As Integer
+Private Init As Boolean
+Private IgnoreScroll As Boolean
+
+Private Sub cboType_Click()
+ 
+ 'If IgnoreModify Or cboType.ListIndex < 0 Then Exit Sub
+ If IgnoreModify Then Exit Sub 'JCK
+ 
+ SetTypeDepends cboType.ListIndex
+ DataModify = True
+End Sub
+
+Private Sub chkFeature_Click(Index As Integer)
+
+' If IgnoreModify Then Exit Sub
+' 2 is disabled; 0 is off; 1 is on
+ Select Case chkFeature(Index).Value
+   Case 0:
+    sstCompartment.TabEnabled(Index) = False
+' Belcourt disables spray controls
+    fraAerSp.Item(0).Enabled = False
+    fraDataSp.Enabled = False
+    optAerosolModelSp(0).Enabled = False
+    optAerosolModelSp(1).Enabled = False
+    cmdDataSp(0).Enabled = False
+
+   Case 1:
+    sstCompartment.TabEnabled(Index) = True
+    sstCompartment.Tab = Index  ' bring tab to front
+' Belcourt enables spray controls
+    fraAerSp.Item(0).Enabled = True
+    fraDataSp.Enabled = True
+    optAerosolModelSp(0).Enabled = True
+    optAerosolModelSp(1).Enabled = True
+    cmdDataSp(0).Enabled = True
+
+ End Select
+ ' If user presses Sprays, (index = 0) press the user
+ ' defined spray input radio button
+ If Index = 0 Then
+    If CompartmentArr(CurrentIndex).F0Sprays.AModelNum = 0 Then
+       optAerosolModelSp(0).Value = True
+    End If
+ End If
+ 
+ ' If user presses Natural Deposition, press the user
+ ' defined button in the natural deposition panel
+ If Index = 2 Then
+    If CompartmentArr(CurrentIndex).F2Deposition.AModelNum = 0 Then
+       optAerosolModelND(0).Value = True
+    End If
+ End If
+
+ DataModify = True
+
+End Sub
+
+Private Sub chkDoseLocation_Click()
+'Added a Type 5 room, Control Room with no dose - JCK
+
+    If Init Then Exit Sub
+    
+    cmdDoseLocation.Enabled = (chkDoseLocation = vbChecked)
+    With CompartmentArr(CurrentIndex)
+        If chkDoseLocation = vbUnchecked Then
+            'If compartment type is Other
+            'it's no longer a dose location
+            If .Type = 4 Then
+                .Type = 3
+            ElseIf .Type = 1 Then
+                'Control Room -- no dose
+                .Type = 5
+            End If
+            cmdDoseLocation.Enabled = False
+        Else
+            'If compartment type is Other
+            'Change it to a Dose Location
+            If .Type = 3 Then
+                .Type = 4
+            ElseIf .Type = 5 Then
+                'Ordinary Control Rooom, with dose
+                .Type = 1
+            End If
+            cmdDoseLocation.Enabled = True
+        End If
+    End With
+    DataModify = True
+End Sub
+
+Private Sub cmdCancel_Click()
+ IgnoreModify = True
+ InitControls
+End Sub
+
+Private Sub cmdDataND_Click(Index As Integer)
+' Natural Deposition:
+   Dim Response
+
+   Select Case Index
+   Case 0: ' user defined coefficients
+         ShowCODepos Index
+   Case 1: ' either henry or powers aerosol model
+      Select Case CompartmentArr(CurrentIndex).F2Deposition.AModelNum
+        Case 2:
+          With frmHenry
+            .BackColor = GetBackColor("Compartment")
+            .Show
+          End With
+        Case 3:
+         Load frmPowersDep
+         With frmPowersDep
+            .BackColor = GetBackColor("Compartment")
+            .Show
+        End With
+     End Select
+   Case 2: 'elem I
+     ShowCODepos Index
+ End Select
+
+End Sub
+
+Private Sub cmdDataOp_Click(Index As Integer)
+' Overlying Pool:
+ 
+ Select Case Index
+   Case 0: 'user defined for all
+         ShowCOPool Index
+   Case 1: ' powers model for pool
+         With frmPowersPool
+            .BackColor = GetBackColor("Compartment")
+            .Show
+        End With
+   Case 2: ' elem and organic Iodine
+     ShowCOPool Index
+ End Select
+End Sub
+
+Private Sub cmdDataSp_Click(Index As Integer)
+' Sprays:
+ 
+  Select Case Index
+   Case 0: 'user defined
+         ShowCOSpray Index
+   Case 1: ' powers model for sprays
+         With frmPowersSpray
+            .BackColor = GetBackColor("Compartment")
+            .Show
+         End With
+   Case 2: ' elem and org Iodine
+        ShowCOSpray Index
+ End Select
+End Sub
+
+Private Sub cmdExit_Click() ' OK
+Dim Choice As VbMsgBoxResult
+
+    If VerifyEnvironment = 0 Then
+      If cboType.ListIndex <> 2 Then
+        Choice = MsgBox("Radtrad calculation requires an Environment comparment" _
+               & vbCrLf & "Exit compartments anyway?", _
+                   vbYesNo Or vbExclamation, "No Environment")
+        If Choice = vbNo Then
+           Exit Sub
+        End If
+      End If
+    End If
+    
+  IgnoreModify = False
+  Unload Me
+End Sub
+
+Private Sub cmdFilterEff_Click()
+  Dim frmCORefil As New frmData ' automatic data form
+  
+  Me.DataOwner = "dfCORefil"
+  With frmCORefil
+    .FilterType = "Recirc"
+    .EnableFilterFailure
+    .Show vbModeless, Me
+  End With
+  Me.DataOwner = ""
+End Sub
+
+Private Sub cmdDoseLocation_Click()
+Dim i As Integer
+
+    Load frmBR
+    With frmBR
+        If DoseLocationIndex = 0 Then
+          DoseLocationIndex = GetDoseLocation
+        End If
+
+        .DoseLocation = DoseLocationIndex
+        If txtName = "" Or UCase(txtName) Like "*UNUSED*" Then
+            .lblCompartment = "Compartment " & CurrentIndex
+        Else
+            .lblCompartment = txtName
+        End If
+        .Show vbModal
+    End With
+End Sub
+
+Private Function GetDoseLocation() As Integer
+'For environment, three breathing rate tables are created, to match the 3 offsite X/Qs
+Dim i As Integer
+
+    If cboType.ListIndex = 2 Then
+        'First 3 dose locations are always Environment
+        'They were initialized in InitComparmentsPathwaysDLs()
+        GetDoseLocation = 1
+    Else
+        For i = 4 To MaxDoses
+            If UCase(DoseLocationArr(i).Name) Like "*UNUSED*" Then
+                DoseLocationIndex = i
+                Exit For
+            End If
+        Next
+        InitDoseLocation
+        GetDoseLocation = i
+    End If
+End Function
+
+Private Sub cmdFilterFailure_Click()
+    Load frmFilterFailure
+    With frmFilterFailure
+        .FilterType = "Recirc"
+        .Show
+    End With
+End Sub
+
+Private Sub Form_Load()
+
+    SetTags
+    IgnoreModify = True
+    
+    With cboType
+        .AddItem "Unused"
+        .ItemData(0) = 0
+        .AddItem "Control Room"
+        .ItemData(1) = 1
+        If Appl.EnvironmentIndex = 0 Then
+            .AddItem "Environment"
+            .ItemData(2) = 2
+        End If
+        .AddItem "Normal"
+        .ItemData(.ListCount - 1) = 3
+    End With
+    
+    With frmRadtrad.cboCompartment
+        'Sets CurrentIndex
+        hsbCurrent.Value = .ListIndex + 1
+    End With
+End Sub
+
+Private Sub Form_Resize()
+  If WindowState = vbNormal Then
+    Left = frmRadtrad.Left + EDGE
+    Top = frmRadtrad.Top
+    'Move left if it overlaps right screen border
+    AdjustToScreen Me
+  End If
+End Sub
+
+Private Sub Form_QueryUnload(cancel As Integer, UnloadMode As Integer)
+  
+  If CurrentIndex > 0 Then 'JCK 6/2006
+    'Improve deletion of compartments - JCK
+    If cboType.ListIndex = 0 And _
+          Not (UCase(CompartmentArr(CurrentIndex).Name) Like "*UNUSED*") Then
+        If ConfirmDelete() Then
+          With frmRadtrad
+              loadCompartmentMenu .cboCompartment
+              .ComboUpdate = False
+              .cboCompartment.ListIndex = 0
+              .ComboUpdate = True
+              
+          End With
+        Else
+            cmdCancel_Click
+            cancel = 1
+        End If
+    ElseIf DataModify And Not IgnoreModify Then
+      cancel = EditData
+      If cancel = 0 Then
+          frmRadtrad.SaveState True
+      End If
+    End If
+  End If
+  
+  If cancel = 0 Then
+    frmRadtrad.cboCompartment.Enabled = True
+  End If
+End Sub
+
+Private Function ConfirmDelete() As Boolean 'JCK 6/2006
+Dim Msg As String
+Dim Header As String
+Dim Response As String
+
+    Msg = "Delete "
+    
+    With CompartmentArr(CurrentIndex)
+        If .Type = 2 Then
+            Msg = Msg & "Environment"
+            Header = "Environment"
+            'Mark no environment present
+            Appl.EnvironmentIndex = 0
+        Else
+            Msg = Msg & "this"
+            Header = "Compartment"
+        End If
+        Response = MsgBox(Msg & " Compartment?", _
+                vbQuestion Or vbYesNo, "Delete " & Header)
+    
+        If Response = vbYes Then
+          .Name = "Unused"
+          .Type = 0
+          .Number = 0
+        
+          DisableCompartmentDependencies
+          ConfirmDelete = True
+        Else
+          ConfirmDelete = False
+        End If
+    End With
+End Function
+
+Private Sub hsbCurrent_Change()
+'CurrentIndex property is always equal to hsb value
+
+  'JCK 6/2006 -----------------
+  If IgnoreScroll Then Exit Sub
+  
+  If CurrentIndex > 0 Then
+    If cboType.ListIndex = 0 And _
+          Not (UCase(CompartmentArr(CurrentIndex).Name) Like "*UNUSED*") Then
+        If ConfirmDelete() Then
+          With frmRadtrad
+            loadCompartmentMenu .cboCompartment
+            .ComboUpdate = False
+            IgnoreScroll = True
+            IgnoreModify = True
+            If hsbCurrent < CurrentIndex Then
+                .cboCompartment.ListIndex = hsbCurrent - 1
+                CurrentIndex = hsbCurrent 'Triggers InitControls(), which resets IgnoreModify
+            Else
+                .cboCompartment.ListIndex = CurrentIndex - 1
+                hsbCurrent = CurrentIndex
+                InitControls 'Resets IgnoreModify
+            End If
+            .ComboUpdate = True
+            IgnoreScroll = False
+          End With
+          Exit Sub
+        End If
+    End If
+  End If
+  '-----------------------------
+  
+  CurrentIndex = hsbCurrent.Value
+  With frmRadtrad
+    .ComboUpdate = False
+    .cboCompartment.ListIndex = CurrentIndex - 1
+    .ComboUpdate = True
+  End With
+End Sub
+
+Private Sub optAerosolModelOp_Click(Index As Integer)
+ CompartmentArr(CurrentIndex).F3OPool.AModelNum = Index + 1
+   Select Case Index
+   Case 0: ' user defined
+     cmdDataOp(0).Enabled = True
+     cmdDataND(1).Caption = "&Aerosol Model.."
+     cmdDataOp(1).Enabled = False
+     cmdDataOp(2).Enabled = False
+
+   Case 1: ' powers
+     cmdDataOp(0).Enabled = False
+     cmdDataOp(1).Enabled = True
+     cmdDataOp(2).Enabled = True
+     cmdDataOp(1).Caption = "&Powers Aerosol Model.."
+ End Select
+ DataModify = True
+End Sub
+
+Private Sub optAerosolModelSp_Click(Index As Integer)
+  CompartmentArr(CurrentIndex).F0Sprays.AModelNum = Index + 1
+  Select Case Index
+   Case 0: ' user defined
+     cmdDataSp(0).Enabled = True
+     cmdDataND(1).Caption = "&Aerosol Model.."
+     cmdDataSp(1).Enabled = False
+     cmdDataSp(2).Enabled = False
+
+   Case 1: ' powers
+     cmdDataSp(0).Enabled = False
+     cmdDataSp(1).Enabled = True
+     cmdDataSp(2).Enabled = True
+     cmdDataSp(1).Caption = "&Powers Aerosol Model.."
+ End Select
+ DataModify = True
+End Sub
+
+Private Sub optOutput_Click(Index As Integer)
+  DataModify = True
+End Sub
+
+Private Sub txtName_Change()
+  DataModify = True
+End Sub
+
+Private Sub txtName_GotFocus()
+ SetSelect txtName
+End Sub
+
+Private Sub txtVolume_Change()
+  DataModify = True
+End Sub
+
+Private Sub txtVolume_GotFocus()
+SetSelect txtVolume
+End Sub
+
+'Private Sub txtVolume_LostFocus()
+'
+'CompartmentArr(CurrentIndex).Volume = CSng(Format(sVolume))
+'End Sub
+
+Private Sub txtWaterVolOp_Change()
+  DataModify = True
+End Sub
+
+Private Sub txtWaterVolOp_GotFocus()
+    SetSelect txtWaterVolOp
+End Sub
+
+Public Sub ShowCOSpray(Index As Integer)
+ 
+ Dim frmCOSpray As New frmData ' automatic data form
+ With CompartmentArr(CurrentIndex).F0Sprays
+    If .AModelNum > 1 Then
+     DataOwner = "dfCOSpray2"
+    ElseIf .AModelNum = 1 Then
+      DataOwner = "dfCOSpray3"
+    Else
+      .AModelNum = 1
+      DataOwner = "dfCOSpray3"
+    End If
+ End With
+'  Me.Iodine = Index
+  frmCOSpray.Show vbModeless, Me
+  Me.DataOwner = ""
+'  Set frmCOSpray = Nothing
+End Sub
+
+Public Sub ShowCODepos(Index As Integer)
+ 
+ Dim frmCODepos As New frmData ' automatic data form
+ 
+ With CompartmentArr(CurrentIndex).F2Deposition
+    If .AModelNum > 1 Then
+     DataOwner = "dfCODepos2"
+    ElseIf .AModelNum = 1 Then
+      DataOwner = "dfCODepos3"
+    Else
+      .AModelNum = 1
+      DataOwner = "dfCODepos3"
+    End If
+ End With
+'  Me.Iodine = Index
+  frmCODepos.Show vbModeless, Me
+  Me.DataOwner = ""
+End Sub
+
+Public Sub ShowCOPool(Index As Integer)
+  Dim frmCOPool As New frmData ' automatic data form
+  Dim i, j
+ 
+ With CompartmentArr(CurrentIndex).F3OPool
+    If .AModelNum > 1 Then
+     DataOwner = "dfCOPool2"
+    ElseIf .AModelNum = 1 Then
+      DataOwner = "dfCOPool3"
+    Else
+      .AModelNum = 1
+      DataOwner = "dfCOPool3"
+'      MsgBox "ShowCOPool" + Str(.AModelNum)
+    End If
+ End With
+
+   frmCOPool.Show vbModeless, Me
+'   Set frmCOPool = Nothing
+End Sub
+
+Public Property Get DataOwner() As String
+  DataOwner = DataOwnerType
+End Property
+
+Public Property Let DataOwner(ByVal vNewValue As String)
+  DataOwnerType = vNewValue
+End Property
+
+Public Property Get CurrentIndex() As Integer
+  CurrentIndex = ThisCompartment
+End Property
+
+Public Property Let CurrentIndex(ByVal vNewValue As Integer)
+' we are changing the current compartment, i.e. the index of CompartmentArr.
+' Save current data if it was modified and passes edits.
+' Then change the index value and initialize the controls to the next
+' compartment.
+  Dim cancel As Integer
+  
+  cancel = 0
+  If DataModify And Not IgnoreModify Then cancel = EditData
+  
+  If cancel = 0 Then
+    ThisCompartment = vNewValue
+    InitControls
+  End If
+End Property
+
+Public Sub SaveData()
+  Dim i, j
+  
+  With CompartmentArr(CurrentIndex)
+     .Name = txtName
+     
+     i = cboType.ItemData(cboType.ListIndex)
+     Select Case i
+         Case 1
+             'Record Type 5 for non-dose Control Room
+             .Type = IIf(chkDoseLocation = vbChecked, 1, 5)
+         Case 3
+             'Record Type 4 for Normal dose room
+             .Type = IIf(chkDoseLocation = vbChecked, 4, 3)
+         Case Else
+             .Type = i
+             If i = 2 Then
+                'Environment is defined -- no longer shows up in list
+                Appl.EnvironmentIndex = CurrentIndex
+             End If
+             
+    End Select
+     
+    If chkDoseLocation = vbChecked Then
+        If DoseLocationIndex = 0 Then
+            DoseLocationIndex = GetDoseLocation
+        End If
+        If DoseLocationIndex = 1 Then
+            'If compartment is Environment then index is always 1,
+            'although there are up to 3 X/Q tables for the environment
+            For i = 1 To 3
+                'Indicate this compartment for all environment X/Qs
+                DoseLocationArr(i).CompartmentNumber = CurrentIndex
+            Next
+        Else
+            With DoseLocationArr(DoseLocationIndex)
+                .CompartmentNumber = CurrentIndex
+                .Name = txtName
+            End With
+        End If
+    ElseIf DoseLocationIndex > 0 Then
+        'No check or check was removed
+        If DoseLocationIndex > 3 Then
+            With DoseLocationArr(DoseLocationIndex)
+                .Name = "Unused"
+                .CompartmentNumber = 0
+            End With
+        End If
+    End If
+    
+    
+    .Volume = CSng(txtVolume.Text)
+    '.SourceTermFraction = CSng(txtST.text)
+'    Debug.Print .SourceTermFraction
+
+    For i = 0 To 2
+        If optOutput(i) Then
+          .PrintDetail = i
+        End If
+    Next
+    
+    For i = 1 To 4
+'  0 is Unchecked (default), 1 is Checked, and 2 is Grayed (dimmed).
+       .Features(i) = chkFeature(i - 1).Value
+   If .Features(i) > 0 Then
+        Select Case i
+          Case 1
+            If .F0Sprays.Count = 0 Then
+              With .F0Sprays
+                If optAerosolModelSp(0) Then
+                    .AModelNum = 1
+                Else
+                    .AModelNum = 2
+                End If
+    
+                .Count = 1
+                ReDim .times(1 To 1) As Single, _
+                        .AerosolRemoval(1 To 1) As Single, _
+                        .ElemRemoval(1 To 1) As Single, _
+                        .OrgRemoval(1 To 1) As Single
+                .AerosolRemoval(1) = DefaultSpray
+                .ElemRemoval(1) = DefaultSpray
+                .OrgRemoval(1) = DefaultSpray
+              End With
+            End If
+          Case 2
+            If .F1ReFilters.Count = 0 Then
+              With .F1ReFilters
+                .Count = 1
+
+                .AeroEffic(1) = DefaultFilter
+                .ElemIEffic(1) = DefaultFilter
+                .OrgIEffic(1) = DefaultFilter
+              End With
+            End If
+          Case 3
+            If .F2Deposition.Count = 0 Then
+              With .F2Deposition
+                For j = 0 To 2
+                  If optAerosolModelND(j) Then
+                    .AModelNum = j + 1
+                    Exit For
+                  End If
+                Next
+                
+                .Count = 1
+                ReDim .times(1 To 1) As Single, _
+                        .AerosolRemoval(1 To 1) As Single, _
+                        .ElemRemoval(1 To 1) As Single
+                .RowCount(1) = 1
+                .RowCount(2) = 1
+                .times(1) = 0
+                .AerosolRemoval(1) = DefaultDeposition
+                .ElemRemoval(1) = DefaultDeposition
+              End With
+            End If
+          Case 4
+            If .F3OPool.Count = 0 Then
+              With .F3OPool
+                .Count = 1
+                ReDim .times(1 To 1) As Single, _
+                        .AerosolDecon(1 To 1) As Single, _
+                        .ElemDecon(1 To 1) As Single, _
+                        .OrgDecon(1 To 1) As Single
+                .AerosolDecon(1) = DefaultPool
+                .ElemDecon(1) = DefaultPool
+                .OrgDecon(1) = DefaultPool
+              End With
+            End If
+        End Select
+      End If
+    Next i
+    
+    If .Type = 3 And .SourceTermFraction > 0 Then
+       .SourceTerm = True
+    End If
+    
+    If .Features(4) = 1 Then
+      If ReplaceOP Then
+       .SourceTermOP = True
+       SourceTerm.Opool = CurrentIndex
+       .F3OPool.WaterVolume = CSng(txtWaterVolOp.Text)
+      Else
+        .Features(4) = 0 ' we are keeping the old pool
+        ' any data entered in f3opool record will be saved till next Init.
+      End If
+    Else
+       .SourceTermOP = False
+    End If
+  End With
+  
+  ' update name in main combo box
+ With frmRadtrad.cboCompartment
+   .Enabled = True
+   .RemoveItem CurrentIndex - 1
+   .AddItem Format(CurrentIndex) + Space(1) + CompartmentArr(CurrentIndex).Name, _
+            CurrentIndex - 1
+   frmRadtrad.ComboUpdate = False
+   .ListIndex = CurrentIndex - 1
+   frmRadtrad.ComboUpdate = True
+ End With
+  Appl.CompartmentCount = CountCompartments
+  'With CompartmentArr(CurrentIndex).F1ReFilters
+  '  .ForcedFlow = CSng(txtForcedFlowRate)
+  'End With
+   
+  DataModify = False
+  IgnoreModify = False
+End Sub
+
+Public Sub SetTags()
+  
+  txtName.Tag = "name"
+  txtVolume.Tag = "nzero"
+'  txtWaterVolOp.Tag = "num"
+  'txtForcedFlowRate.Tag = "num"
+'  txtST.Tag = "num"
+End Sub
+
+Public Sub InitControls()
+Dim i
+Dim AControl
+Dim LocalType As Integer
+
+  For Each AControl In Controls
+    If TypeOf AControl Is TextBox Then AControl.Text = ""
+    If TypeOf AControl Is TextBox Or TypeOf AControl Is ComboBox Then
+      AControl.BackColor = vbWhite
+      AControl.ForeColor = vbBlack
+    End If
+  Next
+  
+  cmdDoseLocation.Enabled = False
+  
+  With CompartmentArr(CurrentIndex)
+      txtName = .Name
+      SetSelect txtName
+      optOutput(.PrintDetail).Value = True
+      txtVolume = ZeroFormat(.Volume, FloatFormat)
+      SetTypeDepends .Type
+      
+      If .Type = 2 Then
+        'Environment option doen't show after one has been defined
+        'but must be added to the list when environment compartment is displayed
+        With cboType
+          If .ItemData(2) = 3 Then
+            'Replace deleted list entry
+            .AddItem "Environment", 2
+            .ItemData(2) = 2
+          End If
+        End With
+      Else
+        With cboType
+          If Appl.EnvironmentIndex = 0 Then
+            'Environment absent or deleted
+            If .ItemData(2) = 3 Then
+              'Replace deleted list entry
+              .AddItem "Environment", 2
+              .ItemData(2) = 2
+            End If
+          Else 'Environment exists
+            If .ItemData(2) = 2 Then
+              'Don't show the option
+              .RemoveItem 2
+            End If
+          End If
+        End With
+      End If
+      
+      Select Case .Type
+        Case 1, 2
+            chkDoseLocation = vbChecked
+            LocalType = .Type
+        Case 4
+            chkDoseLocation = vbChecked
+            LocalType = 3
+        Case 5
+            chkDoseLocation = vbUnchecked
+            LocalType = 1
+        Case Else
+            chkDoseLocation = vbUnchecked
+            LocalType = .Type
+      End Select
+      
+      If cboType.ItemData(2) = 3 Then
+        'Adjust for Environment removed from list
+        If LocalType > 2 Then
+          LocalType = LocalType - 1
+        End If
+      End If
+      
+      IgnoreModify = True
+      cboType.ListIndex = LocalType
+     
+      DoseLocationIndex = 0
+      For i = 1 To MaxDoses
+        If DoseLocationArr(i).CompartmentNumber = CurrentIndex Then
+            DoseLocationIndex = i
+            Exit For
+        End If
+      Next
+      
+      For i = 0 To 3
+        chkFeature(i).Value = .Features(i + 1)
+      Next i
+
+      If .F0Sprays.AModelNum > 0 Then
+        optAerosolModelSp(.F0Sprays.AModelNum - 1).Value = True
+      End If
+      'txtForcedFlowRate = Format(.F1ReFilters.ForcedFlow, FloatFormat)
+      If .F2Deposition.AModelNum > 0 Then
+        optAerosolModelND(.F2Deposition.AModelNum - 1).Value = True
+      End If
+      If .SourceTermOP Then
+        With .F3OPool
+          If (.AModelNum > 0) Then
+            optAerosolModelOp(.AModelNum - 1).Value = True
+          End If
+        End With
+      End If
+      txtWaterVolOp.Text = ZeroFormat(.F3OPool.WaterVolume, FloatFormat)
+      If .Type <> 3 Then
+        chkFeature(3).Value = 0
+        chkFeature(3).Enabled = False
+        txtWaterVolOp.Enabled = False
+        txtWaterVolOp = "0.0"
+      End If
+  
+      optOutput(.PrintDetail) = True
+  End With
+  
+  sstCompartment.Tab = 0
+  'Show
+  Me.Refresh 'JCK
+  
+  With sstCompartment
+     For i = 0 To 3
+       Select Case chkFeature(i).Value
+         Case 0
+           .TabEnabled(i) = False
+         Case 1
+           .TabEnabled(i) = True
+           .Tab = i
+       End Select
+     Next i
+  End With
+  
+  lblCurrent = "This is Compartment " + Format(CurrentIndex) + Space(1)
+  
+  DataModify = False
+  IgnoreModify = False
+  IgnoreScroll = False
+End Sub
+
+Private Sub InitDoseLocation()
+Dim i As Integer, j As Integer
+
+    If DoseLocationIndex > 0 Then
+        Select Case cboType.ListIndex
+            Case 1, 3 'CR or Normal room
+                With DoseLocationArr(DoseLocationIndex)
+                    With .dlBR
+                      If .Model = 0 Then
+                        .Model = 1
+                        .times(1) = SourceTerm.DelayTime
+                        .times(2) = 720 + SourceTerm.DelayTime
+                        .Data(1) = 0.00035
+                        .Data(2) = 0
+                        .Count = 2
+                        
+                        For i = 3 To 10
+                          .times(i) = 0
+                          .Data(i) = 0
+                        Next i
+                      End If
+                    End With
+                    
+                    With .dlOccupy
+                      If .Model = 0 Then
+                        .Model = 1
+                        .times(1) = SourceTerm.DelayTime
+                        .times(2) = 24 + SourceTerm.DelayTime
+                        .times(3) = 96 + SourceTerm.DelayTime
+                        .times(4) = 720
+                        .Data(1) = 1
+                        .Data(2) = 0.6
+                        .Data(3) = 0.4
+                        .Data(4) = 0
+                        .Count = 4
+                        
+                        For i = 5 To 10
+                          .times(i) = Format(0, TIMEFORM)
+                          .Data(i) = 0
+                        Next i
+                      End If
+                    End With
+                End With
+                  
+            Case 2 'ENV
+                For j = 1 To 3
+                  With DoseLocationArr(j)
+                    With .dlBR
+                      If .Model = 0 Then
+                        .Model = 1
+                        .times(1) = SourceTerm.DelayTime
+                        .times(2) = 8 + SourceTerm.DelayTime
+                        .times(3) = 24 + SourceTerm.DelayTime
+                        .times(4) = 720 + SourceTerm.DelayTime
+                        .Data(1) = 0.00035
+                        .Data(2) = 0.00018
+                        .Data(3) = 0.00023
+                        .Data(4) = 0
+                        .Count = 4
+                        For i = 5 To 10
+                          .times(i) = Format(0, TIMEFORM)
+                          .Data(i) = SCIZERO
+                        Next i
+                      End If
+                    End With
+                  End With
+                Next
+        End Select
+    End If
+End Sub
+
+Private Sub hsbCurrent_Scroll()
+  hsbCurrent_Change
+End Sub
+
+Private Sub lblCompart_Click(Index As Integer)
+  
+  Select Case Index
+    Case 2: ' previous compartment
+      If CurrentIndex = 1 Then
+        Exit Sub
+      End If
+     If hsbCurrent.Value = CurrentIndex - 1 Then
+         hsbCurrent_Change
+      Else
+         hsbCurrent.Value = CurrentIndex - 1
+      End If
+    Case 3: ' next compartment
+      If CurrentIndex = MaxCompartments Then
+         Exit Sub
+      End If
+      If hsbCurrent.Value = CurrentIndex + 1 Then
+         hsbCurrent_Change
+      Else
+         hsbCurrent.Value = CurrentIndex + 1
+      End If
+  End Select
+End Sub
+
+Private Sub optAerosolModelND_Click(Index As Integer)
+' AModelNum determines which aerosol model record should contain
+' data: 0=user-defined 1 = henry 2=powers
+
+CompartmentArr(CurrentIndex).F2Deposition.AModelNum = Index + 1
+  Select Case Index
+   Case 0: ' user defined
+     cmdDataND(0).Enabled = True
+     cmdDataND(1).Caption = "&Aerosol Model.."
+     cmdDataND(1).Enabled = False
+     cmdDataND(2).Enabled = False
+   Case 1: ' henry
+     cmdDataND(0).Enabled = False
+     cmdDataND(1).Enabled = True
+     cmdDataND(2).Enabled = True
+     cmdDataND(1).Caption = "&Henry Aerosol Model.."
+   Case 2: ' powers
+     cmdDataND(0).Enabled = False
+     cmdDataND(1).Enabled = True
+     cmdDataND(2).Enabled = True
+     cmdDataND(1).Caption = "&Powers Aerosol Model.."
+ End Select
+ DataModify = True
+End Sub
+
+Public Property Get PassFormEdit() As Boolean
+  PassFormEdit = TheFormEdit
+End Property
+
+Public Property Let PassFormEdit(ByVal vNewValue As Boolean)
+  
+  TheFormEdit = vNewValue
+  If Not TheFormEdit Then
+    ShowErrorMessage EditType, "Compartment " + CompartmentArr(CurrentIndex).Name
+  End If
+End Property
+
+Public Property Get EditType() As String
+   EditType = TheEditType
+End Property
+
+Public Property Let EditType(ByVal vNewValue As String)
+  TheEditType = vNewValue
+  PassFormEdit = DoFormEdit(Me, TheEditType)
+End Property
+
+Public Function EditData() As Integer
+
+Dim cancel As Integer
+    
+ cancel = 0
+ 
+ 'If Not ReplaceCR Or Not ReplaceENV Then ' restore previous type
+ '   cboType.ListIndex = CompartmentArr(CurrentIndex).Type
+ 'End If
+ 
+ If cboType.ListIndex > 0 Then
+    'Select Case cboType.ListIndex 'JCK
+      'Case 1 'control room
+        'If Not ReplaceCR Then 'Removed - JCK
+        '  cancel = 1
+        'End If
+        
+      'Case 2
+        'If Not ReplaceENV Then 'Removed - JCK 9/2006
+        '  cancel = 1
+        'End If
+    'End Select
+    
+    If cancel = 0 Then
+      EditType = "Named"
+      If PassFormEdit Then
+        EditType = "Numeric"
+        If PassFormEdit Then
+          EditType = "Filled"
+          If PassFormEdit Then
+            EditType = "Nonzero"
+            If PassFormEdit Then
+              SaveData
+              frmRadtrad.SaveState True
+            Else
+              cancel = 1 'failed nonzero edit; re-edit when OK pressed
+            End If
+          Else
+            cancel = 1 ' failed numeric edit;  re-edit when OK pressed
+          End If
+        Else
+          cancel = 1 ' failed time edit
+        End If
+      Else
+        cancel = 1 'failed name edit
+      End If
+    End If         'end ListIndex > 0
+ ElseIf cboType.ListIndex = 0 Then
+    SaveData ' JCK - just mark compartment unused
+    frmRadtrad.SaveState True
+ End If
+ EditData = cancel
+End Function
+
+Public Function ReplaceOP() As Boolean
+   Dim Msg, Response
+'  With CompartmentArr(CurrentIndex)
+   If SourceTerm.Opool <> 0 And SourceTerm.Opool <> CurrentIndex Then
+     Msg = "Compartment #" + Str(SourceTerm.Opool) + Space(1) + _
+           CompartmentArr(SourceTerm.Opool).Name + vbCrLf + _
+           "is already defined with the overlying pool feature." + vbCrLf + _
+           "Click Yes to replace that pool with this one, No to cancel replacement." + vbCrLf + vbCrLf + _
+           "Replace existing overlying pool?"
+     Response = MsgBox(Msg, vbYesNo + vbQuestion, "Overlying pool")
+     If Response = vbYes Then
+       With CompartmentArr(SourceTerm.Opool)
+         .Features(4) = 0
+         .F3OPool.AModelNum = 0
+         .F3OPool.Count = 0
+       End With
+       ReplaceOP = True
+     Else
+       ReplaceOP = False
+     End If
+   Else
+     ReplaceOP = True 'no op defined yet
+   End If
+End Function
+
+'Public Function ReplaceCR() As Boolean
+'   Dim msg, Response
+'  With Appl
+'   If .ControlRoomIndex <> 0 And .ControlRoomIndex <> CurrentIndex Then
+'     msg = "Compartment #" + Str(.ControlRoomIndex) + Space(1) + _
+'           CompartmentArr(.ControlRoomIndex).Name + vbCrLf + _
+'           "is already defined as the Control Room." + vbCrLf + _
+'           "Click Yes to replace it with this one, No to cancel replacement." + vbCrLf + vbCrLf + _
+'           "Replace existing Control Room?"
+'     Response = MsgBox(msg, vbYesNo + vbQuestion, "Control Room Exists")
+'     If Response = vbYes Then
+'       .ControlRoomIndex = CurrentIndex
+'       ReplaceCR = True
+'     Else
+'       ReplaceCR = False
+'       cboType.ListIndex = CompartmentArr(CurrentIndex).Type
+'     End If
+'   Else
+'     .ControlRoomIndex = CurrentIndex
+'     ReplaceCR = True 'no op defined yet
+'   End If
+' End With
+'End Function
+
+'Private Function ReplaceENV() As Boolean
+'Dim Msg, Response
+  
+'  With Appl
+'   If .EnvironmentIndex <> 0 And .EnvironmentIndex <> CurrentIndex Then
+'     If CompartmentArr(.EnvironmentIndex).Type = 2 Then
+'       Msg = "Compartment #" + Str(.EnvironmentIndex) + Space(1) + _
+'           CompartmentArr(.EnvironmentIndex).Name + vbCrLf + _
+'           "is already defined as the Environment." + vbCrLf + _
+'           "Click Yes to replace it with this one, No to cancel replacement." + vbCrLf + vbCrLf + _
+'           "Replace existing Environment?"
+'        Response = MsgBox(Msg, vbYesNo + vbQuestion, "Environment Exists")
+'        If Response = vbNo Then
+'          cboType.ListIndex = CompartmentArr(CurrentIndex).Type
+'          ReplaceENV = False
+'          Exit Function
+'        End If
+'      End If
+'   End If
+'   .EnvironmentIndex = CurrentIndex
+'   ReplaceENV = True 'no op defined yet
+' End With
+'End Function
+
+Public Sub SetTypeDepends(ctype)
+'Set controls on form according to compartment type selected
+Dim i
+  
+  Init = True
+  txtVolume.Enabled = True
+  With CompartmentArr(CurrentIndex)
+     Select Case ctype
+         Case 0  'unused
+          txtVolume.Tag = "num"
+          txtWaterVolOp.Enabled = True
+          txtWaterVolOp.Tag = "num"
+          For i = 0 To 3
+            chkFeature(i).Enabled = True
+          Next i
+          
+        Case 1, 5 'control room
+          'If ReplaceCR Then 'Multiple control rooms allowed 11/2005 - JCK
+            txtVolume.Tag = "num"
+            txtWaterVolOp.Enabled = False
+            txtWaterVolOp.Tag = ""
+            For i = 0 To 2
+              chkFeature(i).Enabled = True
+            Next i
+            chkFeature(3).Enabled = False
+            chkDoseLocation = IIf(ctype = 1, 1, 0)
+          'End If
+          
+        Case 2 'environment
+            .Volume = 0
+            txtVolume = TIMEFORM
+            txtVolume.Enabled = False 'environment
+            'txtST.Tag = ""
+            'txtST.Enabled = False ' source term fraction
+            txtWaterVolOp.Enabled = False
+            txtWaterVolOp.Tag = ""
+            For i = 0 To 3
+              chkFeature(i).Enabled = False
+            Next i
+           
+        Case 3, 4 'other
+          txtWaterVolOp.Enabled = True
+          txtWaterVolOp.Tag = "num"
+          For i = 0 To 2 'Never enable Overlying Pools
+            chkFeature(i).Enabled = True
+          Next i
+          chkDoseLocation = IIf(ctype = 4, 1, 0)
+      End Select
+   End With
+   
+   With chkDoseLocation
+     If ctype = 2 Then
+       .Value = vbChecked
+       .Enabled = False
+     Else
+       .Enabled = True
+     End If
+   End With
+
+  cmdDoseLocation.Enabled = (chkDoseLocation = vbChecked)
+  
+  Init = False
+End Sub
+
+Public Function CountCompartments() As Integer
+Dim CompartmentCount
+Dim j
+    
+    CompartmentCount = 0
+    For j = 1 To MaxCompartments
+'      Debug.Print CompartmentArr(j).Name, Appl.CompartmentCount
+      If CompartmentArr(j).Type <> 0 Then ' if used
+        CompartmentCount = CompartmentCount + 1
+        CompartmentArr(j).Number = CompartmentCount
+      End If
+    Next j
+    CountCompartments = CompartmentCount
+End Function
+
+Private Sub DisableCompartmentDependencies()
+Dim i As Integer, j As Integer
+Dim p As Integer, Index As Integer
+Dim Data As Integer
+
+    'User has set Compartment Type to 'Unused' - JCK
+    'Delete Pathways connected to this compartment
+    For p = 1 To MaxPathways
+      With PathwayArr(p)
+        If .ToComp = CurrentIndex Or .FromComp = CurrentIndex Then
+            DeletePathway p, False
+            If frmRadtrad.cboPathway.ListIndex = i - 1 Then
+              frmPathway.Reset
+              Unload frmPathway
+            End If
+        End If
+      End With
+    Next
+
+    'Delete Dose Locations associated with this compartment
+    For p = 1 To MaxDoses
+      With DoseLocationArr(p)
+        If .CompartmentNumber = CurrentIndex Then
+          DeleteDoseLocation p, False
+          If p = 3 Then
+            'Dose location may have an associated offsite X/Q table
+            DeleteOffsiteXQTable
+            'Renumber tables after delete
+            For i = 1 To MaxPathXQ + 1
+                With PathXQArr(i)
+                    If .Name <> "" Then
+                        j = j + 1
+                        .Number = j
+                    End If
+                End With
+            Next
+            
+            'j is actual X/Q count
+            Appl.PathDependentXQcount = j
+            
+            For i = 1 To XQIndexRows
+                For j = 1 To XQIndexCols
+                    Data = PathXQMap(i, j)
+                    If Data = 3 Then
+                        PathXQMap(i, j) = 0
+                    ElseIf Data > 3 Then
+                        Data = Data - 1
+                        PathXQMap(i, j) = Data
+                    End If
+                Next
+            Next
+          End If
+        End If
+      End With
+    Next
+    
+    With SourceTerm 'JCK 3/2006
+    'If compartment contained a source term, delete it
+    'If it's not the last one, fix the sequence
+        If UBound(.SourceTermTable) > 0 Then
+            For i = 1 To MaxSourceTerm
+                With .SourceTermTable(i)
+                    If .CompartmentNumber = CurrentIndex Then
+                        .CompartmentNumber = 0
+                        .Fraction = 0
+                        If i < MaxSourceTerm Then
+                            If SourceTerm.SourceTermTable(i + 1).CompartmentNumber > 0 Then
+                                'Move items down in the array
+                                For j = i To MaxSourceTerm - 1
+                                    With SourceTerm.SourceTermTable(j)
+                                        .CompartmentNumber = SourceTerm.SourceTermTable(j + 1).CompartmentNumber
+                                        If .CompartmentNumber > CurrentIndex Then
+                                            'Adjust Source Term table JCK 5/2006
+                                            .CompartmentNumber = .CompartmentNumber - 1
+                                        End If
+                                        .Fraction = SourceTerm.SourceTermTable(j + 1).Fraction
+                                        .IFX(0) = SourceTerm.SourceTermTable(j + 1).IFX(0)
+                                        .IFX(1) = SourceTerm.SourceTermTable(j + 1).IFX(1)
+                                        .IFX(2) = SourceTerm.SourceTermTable(j + 1).IFX(2)
+                                        .NifIndex = SourceTerm.SourceTermTable(j + 1).NifIndex
+                                        .NifType = SourceTerm.SourceTermTable(j + 1).NifType
+                                        .RftIndex = SourceTerm.SourceTermTable(j + 1).RftIndex
+                                    End With
+                                Next
+                            Else
+                                'Clean up last entry
+                                .CompartmentNumber = 0
+                                .Fraction = 0
+                                .IFX(0) = 0
+                                .IFX(1) = 0
+                                .IFX(2) = 0
+                                .NifIndex = 0
+                                .NifType = 0
+                                .RftIndex = 0
+                                Exit For
+                            End If
+                        End If
+                    ElseIf .CompartmentNumber > CurrentIndex Then
+                        'Adjust Source Term table JCK 5/2006
+                        .CompartmentNumber = .CompartmentNumber - 1
+                    ElseIf i = MaxSourceTerm Then
+                        .CompartmentNumber = 0
+                        .Fraction = 0
+                        .IFX(0) = 0
+                        .IFX(1) = 0
+                        .IFX(2) = 0
+                        .NifIndex = 0
+                        .NifType = 0
+                        .RftIndex = 0
+                    End If
+                End With
+            Next
+        End If
+    End With
+    
+    If CompartmentArr(CurrentIndex).Type = 2 Then
+        'Environment is being deleted
+        Appl.EnvironmentIndex = 0
+    End If
+
+    If CurrentIndex < Appl.CompartmentCount Then  'JCK 5/2006
+        'If compartment wasn't the last one, renumber
+        j = 0
+        For i = 1 To MaxCompartments
+            If CompartmentArr(i).Name <> "Unused" Then
+                j = j + 1
+                CompartmentArr(i).Number = j
+            End If
+        Next
+        Appl.CompartmentCount = j
+        
+        'Pathway references need adjusting, too
+        j = 0
+        For i = 1 To MaxPathways
+            With PathwayArr(i)
+                If .Name <> "Unused" Then
+                    If .FromComp > CurrentIndex Then
+                        .FromComp = .FromComp - 1
+                    End If
+                    If .ToComp > CurrentIndex Then
+                        .ToComp = .ToComp - 1
+                    End If
+                End If
+            End With
+        Next
+        'Dose locations
+        For i = 1 To MaxDoses
+            With DoseLocationArr(i)
+                If .CompartmentNumber > CurrentIndex Then
+                    .CompartmentNumber = .CompartmentNumber - 1
+                End If
+            End With
+        Next
+        
+        'Fix global compartment array
+        DeleteFromArray
+    End If
+End Sub
+
+Private Sub DeleteFromArray() 'JCK 5/2006
+Dim i As Integer, j As Integer
+
+On Error GoTo DeleteError
+
+    For i = CurrentIndex To MaxCompartments - 1
+        With CompartmentArr(i)
+          .Type = CompartmentArr(i + 1).Type
+          .Name = CompartmentArr(i + 1).Name
+          .Number = CompartmentArr(i + 1).Number
+          .SourceTermOP = CompartmentArr(i + 1).SourceTermOP
+          .SourceTerm = CompartmentArr(i + 1).SourceTerm
+          .Volume = CompartmentArr(i + 1).Volume
+          .Decay = CompartmentArr(i + 1).Decay
+          .PrintDetail = CompartmentArr(i + 1).PrintDetail
+          .SourceTermFraction = CompartmentArr(i + 1).SourceTermFraction
+          For j = 1 To 4
+            .Features(j) = CompartmentArr(i + 1).Features(j)
+          Next j
+          
+          With .F0Sprays
+            .AModelNum = CompartmentArr(i + 1).F0Sprays.AModelNum
+            .Count = CompartmentArr(i + 1).F0Sprays.Count
+            .RowCount(1) = CompartmentArr(i + 1).F0Sprays.RowCount(1)
+            .RowCount(2) = CompartmentArr(i + 1).F0Sprays.RowCount(2)
+            .RowCount(3) = CompartmentArr(i + 1).F0Sprays.RowCount(3)
+
+              If .AModelNum > 0 Then
+                  ReDim .AerosolRemoval(1 To .Count) As Single, _
+                    .ElemRemoval(1 To .Count) As Single, _
+                    .OrgRemoval(1 To .Count) As Single, _
+                    .times(1 To .Count) As Single
+                      
+                  Select Case .AModelNum
+                    Case 1
+                        For j = 1 To .Count
+                          .times(j) = CompartmentArr(i + 1).F0Sprays.times(j)
+                          .AerosolRemoval(j) = CompartmentArr(i + 1).F0Sprays.AerosolRemoval(j)
+                        Next
+                    Case 2
+                        With .Powers
+                          .Count = CompartmentArr(i + 1).F0Sprays.Powers.Count
+                          ReDim .Height(1 To .Count) As Single, _
+                              .times(1 To .Count) As Single, _
+                              .Flux(1 To .Count) As Single
+                          .Percentile = CompartmentArr(i + 1).F0Sprays.Powers.Percentile
+                          .FracSpray = CompartmentArr(i + 1).F0Sprays.Powers.FracSpray
+                          For j = 1 To .Count
+                            .times(j) = CompartmentArr(i + 1).F0Sprays.Powers.times(j)
+                            .Flux(j) = CompartmentArr(i + 1).F0Sprays.Powers.Flux(j)
+                            .Height(j) = CompartmentArr(i + 1).F0Sprays.Powers.Height(j)
+                          Next
+                        End With
+                End Select
+            End If
+          
+            For j = 1 To .Count
+              .ElemRemoval(j) = CompartmentArr(i + 1).F0Sprays.ElemRemoval(j)
+              .OrgRemoval(j) = CompartmentArr(i + 1).F0Sprays.OrgRemoval(j)
+            Next
+            .ElementalDF = CompartmentArr(i + 1).F0Sprays.ElementalDF
+            .AerosolDF = CompartmentArr(i + 1).F0Sprays.AerosolDF
+            .LambdaAerosol = CompartmentArr(i + 1).F0Sprays.LambdaAerosol
+          End With
+
+          With .F1ReFilters
+            .Count = CompartmentArr(i + 1).F1ReFilters.Count
+            If .Count > 0 Then
+                ReDim .FlowRates(1 To .Count) As Single, _
+                      .AeroEffic(1 To .Count) As Single, _
+                      .ElemIEffic(1 To .Count) As Single, _
+                      .OrgIEffic(1 To .Count) As Single, _
+                      .times(1 To .Count) As Single
+                For j = 1 To .Count
+                    .FlowRates(j) = CompartmentArr(i + 1).F1ReFilters.FlowRates(j)
+                    .AeroEffic(j) = CompartmentArr(i + 1).F1ReFilters.AeroEffic(j)
+                    .ElemIEffic(j) = CompartmentArr(i + 1).F1ReFilters.ElemIEffic(j)
+                    .OrgIEffic(j) = CompartmentArr(i + 1).F1ReFilters.OrgIEffic(j)
+                    .times(j) = CompartmentArr(i + 1).F1ReFilters.times(j)
+                Next
+            End If
+            .FailEnable = CompartmentArr(i + 1).F1ReFilters.FailEnable
+            For j = 1 To 5
+              .FailureData(j) = CompartmentArr(i + 1).F1ReFilters.FailureData(j)
+            Next
+            .StopTime = CompartmentArr(i + 1).F1ReFilters.StopTime
+          End With
+          
+          With .F2Deposition
+            With .Henry
+              .Count = CompartmentArr(i + 1).F2Deposition.Henry.Count
+              If .Count > 0 Then
+                ReDim .times(1 To .Count) As Single, _
+                      .FallHeight(1 To .Count) As Single, _
+                      .ParticleDensity(1 To .Count) As Single
+                  For j = 1 To .Count
+                      .times(j) = CompartmentArr(i + 1).F2Deposition.Henry.times(j)
+                      .FallHeight = CompartmentArr(i + 1).F2Deposition.Henry.FallHeight
+                      .ParticleDensity = CompartmentArr(i + 1).F2Deposition.Henry.ParticleDensity
+                  Next
+              End If
+            End With
+            .AModelNum = CompartmentArr(i + 1).F2Deposition.AModelNum
+            .Count = CompartmentArr(i + 1).F2Deposition.Count
+            .RowCount(1) = CompartmentArr(i + 1).F2Deposition.RowCount(1)
+            .RowCount(2) = CompartmentArr(i + 1).F2Deposition.RowCount(2)
+            With .Powers
+              .Percentile = CompartmentArr(i + 1).F2Deposition.Powers.Percentile
+              .ReactorAccidentType = CompartmentArr(i + 1).F2Deposition.Powers.ReactorAccidentType
+            End With
+            If .Count > 0 Then
+                ReDim .AerosolRemoval(1 To .Count) As Single, _
+                  .ElemRemoval(1 To .Count) As Single, _
+                  .times(1 To .Count) As Single
+                For j = 1 To .Count
+                  .AerosolRemoval(j) = CompartmentArr(i + 1).F2Deposition.AerosolRemoval(j)
+                  .ElemRemoval(j) = CompartmentArr(i + 1).F2Deposition.ElemRemoval(j)
+                  .times(j) = CompartmentArr(i + 1).F2Deposition.times(j)
+                Next
+            End If
+          End With
+    
+          With .F3OPool
+            .AModelNum = CompartmentArr(i + 1).F3OPool.AModelNum
+            .Count = CompartmentArr(i + 1).F3OPool.Count
+            .RowCount(1) = CompartmentArr(i + 1).F3OPool.RowCount(1)
+            .RowCount(2) = CompartmentArr(i + 1).F3OPool.RowCount(2)
+            .RowCount(3) = CompartmentArr(i + 1).F3OPool.RowCount(3)
+            .WaterVolume = CompartmentArr(i + 1).F3OPool.WaterVolume
+            If .Count > 0 Then
+                ReDim .AerosolDecon(1 To .Count) As Single, _
+                  .ElemDecon(1 To .Count) As Single, _
+                  .OrgDecon(1 To .Count) As Single, _
+                  .times(1 To .Count) As Single
+                For j = 1 To .Count
+                  .AerosolDecon(j) = CompartmentArr(i + 1).F3OPool.AerosolDecon(j)
+                  .ElemDecon(j) = CompartmentArr(i + 1).F3OPool.ElemDecon(j)
+                  .OrgDecon(j) = CompartmentArr(i + 1).F3OPool.OrgDecon(j)
+                  .times(j) = CompartmentArr(i + 1).F3OPool.times(j)
+                Next j
+            End If
+            With .Powers
+              .Count = CompartmentArr(i + 1).F3OPool.Powers.Count
+              .Percentile = CompartmentArr(i + 1).F3OPool.Powers.Percentile
+              If .Count > 0 Then
+                ReDim .PoolDepth(1 To .Count) As Single, _
+                      .PoolTemp(1 To .Count) As Single, _
+                      .times(1 To .Count) As Single
+                For j = 1 To .Count
+                  .PoolTemp(j) = CompartmentArr(i + 1).F3OPool.Powers.PoolTemp(j)
+                  .PoolDepth(j) = CompartmentArr(i + 1).F3OPool.Powers.PoolDepth(j)
+                  .times(j) = CompartmentArr(i + 1).F3OPool.Powers.times(j)
+                Next j
+              End If
+            End With
+          End With
+        End With
+      Next i
+      
+    'Last entry is always blank after a delete, i = MaxCompartments
+    With CompartmentArr(MaxCompartments)
+      .Type = 0
+      .Name = "Unused"
+      .Number = 0
+      .SourceTermOP = False
+      .SourceTerm = False
+      .Volume = 0#
+      .Decay = 0
+      .PrintDetail = 0
+      .SourceTermFraction = 0#
+      For j = 1 To 4
+        .Features(j) = 0
+      Next j
+      With .F0Sprays
+        .AModelNum = 0
+        .Count = 0
+        .RowCount(1) = 0
+        .RowCount(2) = 0
+        .RowCount(3) = 0
+        With .Powers
+          .Count = 0
+          .Percentile = 0#
+          .FracSpray = 0#
+          ReDim .Height(1 To 1) As Single, _
+            .times(1 To 1) As Single, _
+            .Flux(1 To 1) As Single
+        End With
+        ReDim .AerosolRemoval(1 To 1) As Single, _
+              .ElemRemoval(1 To 1) As Single, _
+              .OrgRemoval(1 To 1) As Single, _
+              .times(1 To 1) As Single
+      End With
+      With .F1ReFilters
+        .Count = 0
+        '.ForcedFlow = 0#
+        ReDim .FlowRates(1 To 1) As Single, _
+              .AeroEffic(1 To 1) As Single, _
+              .ElemIEffic(1 To 1) As Single, _
+              .OrgIEffic(1 To 1) As Single, _
+              .times(1 To 1) As Single
+        .FailEnable = 0
+        For j = 1 To 5
+          .FailureData(j) = 0
+        Next
+        .StopTime = 0
+      End With
+      With .F2Deposition
+        With .Henry
+          .Count = 0
+          ReDim .times(1 To 1) As Single, _
+                .FallHeight(1 To 1) As Single, _
+                .ParticleDensity(1 To 1) As Single
+        End With
+        .AModelNum = 0
+        .RowCount(1) = 0
+        .RowCount(2) = 0
+        With .Powers
+          .Percentile = 0#
+          .ReactorAccidentType = 0
+        End With
+        ReDim .AerosolRemoval(1 To 1) As Single, _
+              .ElemRemoval(1 To 1) As Single, _
+              .times(1 To 1) As Single
+      End With
+
+      With .F3OPool
+        .AModelNum = 0
+        .Count = 0
+        .RowCount(1) = 0
+        .RowCount(2) = 0
+        .RowCount(3) = 0
+        .WaterVolume = 0#
+        ReDim .AerosolDecon(1 To 1) As Single, _
+              .ElemDecon(1 To 1) As Single, _
+              .OrgDecon(1 To 1) As Single, _
+              .times(1 To 1) As Single
+        For j = 1 To 1
+          .AerosolDecon(j) = 1#
+          .ElemDecon(j) = 1#
+          .OrgDecon(j) = 1#
+        Next j
+        With .Powers
+          .Count = 0
+          .Percentile = 0#
+          ReDim .PoolDepth(1 To 1) As Single, _
+                .PoolTemp(1 To 1) As Single, _
+                .times(1 To 1) As Single
+          For j = 1 To 1
+            .PoolTemp(j) = 36#
+          Next j
+        End With
+      End With
+    End With
+    Exit Sub
+    
+DeleteError:
+    MsgBox Err.Description, vbExclamation, "DeleteFromArray()"
+    Exit Sub
+    Resume Next
+End Sub
+
+'Moved from Module1 3/2006
+Private Sub DeleteOffsiteXQTable() '3/2006 JCK
+'Delete X/Q table for a dose location
+Dim i As Integer, j As Integer
+
+    With PathXQArr(3)
+        With .dlXQ
+          .Count = 0
+          .Model = 0
+          ReDim .times(1 To MaxDimen) As Single, _
+                    .Data(1 To MaxDimen) As Single
+        End With
+        .Name = ""
+        .Number = 0
+    End With
+End Sub
